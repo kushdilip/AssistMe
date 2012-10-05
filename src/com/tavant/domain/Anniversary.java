@@ -10,22 +10,15 @@ public class Anniversary implements Serializable {
 	private String date;
 	private String people;
 	private String repeatCycle;
-	private String userId;
+	private int userId;
 
-	public String getUserId() {
-		return userId;
+	public Anniversary() {
+
 	}
 
-	public void setUserId(String userId) {
+	public Anniversary(int anniversaryId, int userId) {
+		this.anniversaryId = anniversaryId;
 		this.userId = userId;
-	}
-
-	public String getRepeatCycle() {
-		return repeatCycle;
-	}
-
-	public void setRepeatCycle(String repeatCycle) {
-		this.repeatCycle = repeatCycle;
 	}
 
 	public int getAnniversaryId() {
@@ -44,6 +37,14 @@ public class Anniversary implements Serializable {
 		this.title = title;
 	}
 
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
 	public String getPeople() {
 		return people;
 	}
@@ -52,12 +53,20 @@ public class Anniversary implements Serializable {
 		this.people = people;
 	}
 
-	public String getDate() {
-		return date;
+	public String getRepeatCycle() {
+		return repeatCycle;
 	}
 
-	public void setDate(String date) {
-		this.date = date;
+	public void setRepeatCycle(String repeatCycle) {
+		this.repeatCycle = repeatCycle;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	@Override
@@ -77,7 +86,7 @@ public class Anniversary implements Serializable {
 		result = prime * result
 				+ ((repeatCycle == null) ? 0 : repeatCycle.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
-		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+		result = prime * result + userId;
 		return result;
 	}
 
@@ -112,10 +121,7 @@ public class Anniversary implements Serializable {
 				return false;
 		} else if (!title.equals(other.title))
 			return false;
-		if (userId == null) {
-			if (other.userId != null)
-				return false;
-		} else if (!userId.equals(other.userId))
+		if (userId != other.userId)
 			return false;
 		return true;
 	}

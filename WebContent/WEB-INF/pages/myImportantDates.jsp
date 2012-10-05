@@ -34,7 +34,10 @@
 							</td>
 						</tr>
 					</c:forEach>
-					
+					<tr>
+						<td colspan="5" align="center"><a href="addAnniversary.html">Add Anniversary</a></td>
+						
+					</tr>
 				</tbody>
 			</table>
 			

@@ -56,7 +56,10 @@ public class MapperTest {
 	@Test
 	public void deleteAnniversary() {
 //		anniversaryDAO.delete(2, 2);
-//		System.out.println(anniversaryDAO.selectById(5, "birthday"));
+		Anniversary anniversary = new Anniversary();
+		anniversary.setAnniversaryId(5);
+		anniversary.setUserId(1);
+		System.out.println(anniversaryDAO.selectById(anniversary));
 
 	}
 }

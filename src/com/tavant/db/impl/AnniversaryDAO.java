@@ -50,7 +50,7 @@ public class AnniversaryDAO {
 		}
 	}
 
-	public void delete(int anniversaryId, int userId) {
+	public void delete(Anniversary anniversary) {
 
 		SqlSession session = sqlSessionFactory.openSession();
 
@@ -58,7 +58,7 @@ public class AnniversaryDAO {
 
 			AnniversaryMapper mapper = session
 					.getMapper(AnniversaryMapper.class);
-			mapper.delete(anniversaryId, userId);
+			mapper.delete(anniversary);
 
 			session.commit();
 		} finally {
@@ -82,16 +82,15 @@ public class AnniversaryDAO {
 		}
 	}
 	
-	public Anniversary selectById(int anniversaryId, int userId){
+	public Anniversary selectById(Anniversary anniversary){
 
 		SqlSession session = sqlSessionFactory.openSession();
 
 		try {
 			
 			AnniversaryMapper mapper = session.getMapper(AnniversaryMapper.class);
-			Anniversary anniversary = mapper.selectById(anniversaryId, userId);
-			System.out.println(anniversary);
-			return anniversary;
+			return mapper.selectById(anniversary);
+		
 		} finally {
 			session.close();
 		}

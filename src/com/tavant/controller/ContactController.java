@@ -38,7 +38,6 @@ public class ContactController {
 
 		// if user session is empty, return to master page
 		if (request.getSession().getAttribute("currentUser") == null) {
-			System.out.println("No one is logged in, returning to master page");
 			return new ModelAndView("master");
 		}
 
@@ -50,7 +49,7 @@ public class ContactController {
 	@RequestMapping(value = "/addContact", method = RequestMethod.POST)
 	public ModelAndView onSubmit(@ModelAttribute("contact") Contact contact,
 			BindingResult result, SessionStatus status,
-			HttpServletRequest request) {
+			HttpServletRequest request) throws Exception {
 
 		ModelMap model = new ModelMap();
 
@@ -61,7 +60,7 @@ public class ContactController {
 		contactService.addContact(contact);
 		model.addAttribute(contact);
 
-		return new ModelAndView("addSuccess", model);
+		return showContactList(request);
 	}
 
 	@RequestMapping("/showContacts")

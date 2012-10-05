@@ -17,8 +17,9 @@ public interface AnniversaryMapper {
 	final String SELECT_ALL_BY_USER_ID = "SELECT * FROM ANNIVERSARIES WHERE USER_ID=#{userId}";
 	final String DELETE = "DELETE FROM ANNIVERSARIES WHERE ANNIVERSARY_ID = #{anniversaryId} AND USER_ID=#{userId}";
 	final String UPDATE = "UPDATE ANNIVERSARY SET DATE=#{date}, PEOPLE=#{people}, REPEAT_CYCLE=#{repeatCycle}, TITLE=#{title},USER_ID={userId} WHERE ANNIVERSARY_ID = #{anniversaryId} AND USER_ID=#{user_id}";
-	final String SELECT_BY_ANNIVERSARY_ID = "SELECT * FROM ANNIVERSARIES WHERE (ANNIVERSARY_ID = #{anniversaryId} AND USER_ID=#{userId})";
-
+	final String SELECT_BY_ANNIVERSARY_ID = "SELECT * FROM ANNIVERSARIES WHERE USER_ID = #{userId} AND ANNIVERSARY_ID = #{anniversaryId}";
+//	final String TEMP_SELECT = "SELECT * FROM ANNIVERSARIES WHERE USER_ID = #{userId} AND ANNIVERSARY_ID = #{anniversaryId}";
+	
 	@Insert(INSERT)
 	@Options(useGeneratedKeys = true, keyProperty = "anniversary_id")
 	void insert(Anniversary anniversary);
@@ -36,7 +37,7 @@ public interface AnniversaryMapper {
 	List<Anniversary> selectAllByUserId(int userId);
 
 	@Delete(DELETE)
-	void delete(int anniversaryId, int userId);
+	void delete(Anniversary anniversary);
 
 	@Update(UPDATE)
 	void update(Anniversary anniversary);
@@ -51,7 +52,7 @@ public interface AnniversaryMapper {
 			@Result(property = "userId", column = "USER_ID")
 
 	})
-	Anniversary selectById(int anniversaryId, int userId);
+	Anniversary selectById(Anniversary anniversary);
 
 	
 }

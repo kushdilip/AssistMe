@@ -30,8 +30,8 @@ public class AnniversaryServiceImpl implements AnniversaryService {
 	}
 
 	@Override
-	public void deleteAnniversary(int anniversaryId, int userId) {
-		anniversaryDAO.delete(anniversaryId, userId);
+	public void deleteAnniversary(Anniversary anniversary) {
+		anniversaryDAO.delete(anniversary);
 		
 	}
 
@@ -41,8 +41,8 @@ public class AnniversaryServiceImpl implements AnniversaryService {
 	}
 
 	@Override
-	public Anniversary getAnniversaryById(int anniversaryId, int userId) {
-		return anniversaryDAO.selectById(anniversaryId, userId);
+	public Anniversary getAnniversaryById(Anniversary anniversary) {
+		return anniversaryDAO.selectById(anniversary);
 	}
 
 }

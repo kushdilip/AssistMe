@@ -26,7 +26,7 @@
 			style="background-color: #FFD700; height: 490px; width: 150 px; float: left; font-size: large; font-weight: bold;">
 			<a href="home.html"><b>Home</b></a><br>
 			<a href="showContacts.html">Contacts</a><br> 
-			<a href ="importantDates.html">Important Dates</a><br>
+			<a href ="showImportantDates.html">Important Dates</a><br>
 			Money Tracker
 		</div>
 
