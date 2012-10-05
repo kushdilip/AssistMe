@@ -7,6 +7,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+
+<script type="text/javascript" src="resources/js/calendar.js"></script>
+<script type="text/javascript" src=""></script>
+<link rel="stylesheet" type="text/css" href="resources/styles/style.css">
+
+
 </head>
 <body>
 	<p align="center">
@@ -14,6 +20,7 @@
 	</p>
 
 	<h2>Add Anniversary</h2>
+	<p id="demo">I should change</p>
 	<form:form method="POST" commandName="anniversary">
 		<table>
 			<tr>
@@ -25,7 +32,13 @@
 				<td><form:input path="people" /></td>
 			</tr>
 			<tr>
+				<td>Date :</td>
+			</tr>
+
+
+			<tr>
 				<td>Recurring :</td>
+			</tr>
 		</table>
 	</form:form>
 </body>
