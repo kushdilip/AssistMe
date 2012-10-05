@@ -5,7 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="resources/styles/style.css">
 </head>
+
 <body>
 	<div id="container" style="width: 100%">
 
@@ -27,7 +29,10 @@
 
 
 		</div>
-
+		
+<!-- 		<img src="resources/images/tavant.jpg">
+ -->
+		
 		<div id="footer"
 			style="background-color: #FFA500; clear: both; text-align: center;">
 			Copyright © TavantTechnologies.com</div>
