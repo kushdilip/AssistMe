@@ -6,6 +6,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<link href="resources/styles/error.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+function confirmPassword() {
+	var e = form.elements;
+	if(e['password'].value != e['confirmPassword'].value){
+		alert('Your passwords do not match. Please type more carefully');		
+	}
+	
+}
+</script>
 </head>
 <body>
 	<div id="container" style="width: 100%">
@@ -13,31 +23,44 @@
 			<h1 style="margin-bottom: 0;">AssistMe</h1>
 			<h3>Your own Personal Assistant</h3>
 		</div>
-		<div id="registrationForm" align="center">
+		<div id="registrationForm" align="center" style="height: 80%;">
 			<h2>Registration Form</h2>
 			<form:form method="POST" commandName="user">
 				<table>
 					<tr>
 						<td>First Name:</td>
 						<td><form:input path="firstName" /></td>
+						<td><form:errors path="firstName" cssClass="error" /></td>
 					</tr>
 					<tr>
 						<td>Last Name:</td>
 						<td><form:input path="lastName" /></td>
+						<td><form:errors path="lastName" cssClass="error" /></td>
 					</tr>
 					<tr>
 						<td>Email Id:</td>
 						<td><form:input path="emailId" /></td>
+						<td><form:errors path="emailId" cssClass="error" /></td>
+
 					</tr>
 					<tr>
 						<td>Password:</td>
-						<td><form:input path="password" type="password" /></td>
+						<td><form:input path="password" type="password" name="password"/></td>
+						<td><form:errors path="password" cssClass="error" /></td>
 					</tr>
 					<tr>
+						<td>Retype Password:</td>
+						<td><input type="password" name="confirmPassword"  onblur="confirmPassword()" /></td>
+						<td><label class="error" id="confirmationError"></label></td>
+					</tr>
+					
+					<tr>
+						<td></td>
 						<td align="center" colspan="2"><input type="submit"
 							value="Add" /></td>
 					</tr>
 					<tr>
+						<td></td>
 						<td align="center" colspan="2"><input type="button"
 							value="Cancel" onClick="window.location.href='index.html'"></td>
 					</tr>

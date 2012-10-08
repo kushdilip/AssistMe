@@ -8,6 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 
+<link href="resources/styles/reset.css" rel="stylesheet" type="text/css" />
 <link href="resources/styles/error.css" rel="stylesheet" type="text/css" />
 <link href="resources/styles/main.css" rel="stylesheet" type="text/css" />
 

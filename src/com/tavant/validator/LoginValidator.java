@@ -11,23 +11,15 @@ import com.tavant.services.UserService;
 public class LoginValidator implements Validator {
 	private UserService userService;
 	private User validUser;
-	
-	
-	
+
 	@Autowired
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
-	
-	
-
 
 	public User getValidUser() {
 		return validUser;
 	}
-
-
-
 
 	@Override
 	public boolean supports(Class<?> clazz) {
@@ -36,30 +28,30 @@ public class LoginValidator implements Validator {
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "emailId", "required.emailid","Field name is required.");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "required.password","Field name is required.");
-		
-		User user = (User)target;
-		
-//		System.out.println("i'm from validator " + user);
-		if(!((user.getemailId()).trim().isEmpty() || (user.getPassword()).trim().isEmpty()) ) {
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "emailId",
+				"required.emailid", "Field name is required.");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password",
+				"required.password", "Field name is required.");
+
+		User user = (User) target;
+
+		// System.out.println("i'm from validator " + user);
+		if (!((user.getemailId()).trim().isEmpty() || (user.getPassword())
+				.trim().isEmpty())) {
 			User currentUser = userService.selectByEmailId(user.getemailId());
-			
-			if(currentUser != null && currentUser.getPassword().equals(user.getPassword())){
+
+			if (currentUser != null
+					&& currentUser.getPassword().equals(user.getPassword())) {
 				validUser = currentUser;
-//				System.out.println("i'm from validator " + target);
+				// System.out.println("i'm from validator " + target);
+			} else {
+				// System.out.println("I'm from vaidator, something is wrong");
+				errors.rejectValue("emailId", "loginInfo.notmatch",
+						"Something is wrong");
 			}
-			else {
-//				System.out.println("I'm from vaidator, something is wrong");			
-				errors.rejectValue("emailId", "loginInfo.notmatch", "Something is wrong");				
-			}
-			
-			
-			
+
 		}
-		
+
 	}
-	
-	
 
 }

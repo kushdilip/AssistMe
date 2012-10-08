@@ -15,7 +15,7 @@
 
 	<div align="center">
 		<h3 align="center">my important dates</h3>
-		<a href="showImportantDates.html">Refresh List</a> <br> <br>
+		<a href="importantDates.html">Refresh List</a> <br> <br>
 		<table border="1" bordercolor="black">
 			<thead>
 				<tr>
