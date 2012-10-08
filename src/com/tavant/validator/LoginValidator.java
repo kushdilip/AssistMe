@@ -36,9 +36,9 @@ public class LoginValidator implements Validator {
 		User user = (User) target;
 
 		// System.out.println("i'm from validator " + user);
-		if (!((user.getemailId()).trim().isEmpty() || (user.getPassword())
+		if (!((user.getEmailId()).trim().isEmpty() || (user.getPassword())
 				.trim().isEmpty())) {
-			User currentUser = userService.selectByEmailId(user.getemailId());
+			User currentUser = userService.selectByEmailId(user.getEmailId());
 
 			if (currentUser != null
 					&& currentUser.getPassword().equals(user.getPassword())) {

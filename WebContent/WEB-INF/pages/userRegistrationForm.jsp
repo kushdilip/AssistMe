@@ -7,15 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 <link href="resources/styles/error.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript">
-function confirmPassword() {
-	var e = form.elements;
-	if(e['password'].value != e['confirmPassword'].value){
-		alert('Your passwords do not match. Please type more carefully');		
-	}
-	
-}
-</script>
+
 </head>
 <body>
 	<div id="container" style="width: 100%">
@@ -45,13 +37,13 @@ function confirmPassword() {
 					</tr>
 					<tr>
 						<td>Password:</td>
-						<td><form:input path="password" type="password" name="password"/></td>
+						<td><form:input path="password" type="password" /></td>
 						<td><form:errors path="password" cssClass="error" /></td>
 					</tr>
 					<tr>
-						<td>Retype Password:</td>
-						<td><input type="password" name="confirmPassword"  onblur="confirmPassword()" /></td>
-						<td><label class="error" id="confirmationError"></label></td>
+						<td>Confirm Password:</td>
+						<td><form:input path="confirmPassword" type="password" /></td>
+						<td><form:errors path="confirmPassword" cssClass="error" /></td>
 					</tr>
 					
 					<tr>

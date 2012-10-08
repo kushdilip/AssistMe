@@ -12,10 +12,8 @@
 		<jsp:include page="../common/header.jsp"></jsp:include>
 		<jsp:include page="../common/menubar.jsp"></jsp:include>
 		
-		<div>
-			<p>
-			Welcome User: ${currentUser.firstName}
-			</p>
+		<div align="center">
+			<h1>Welcome</h1>
 		</div>
 		<jsp:include page="../common/footer.jsp"></jsp:include>
 	</div>

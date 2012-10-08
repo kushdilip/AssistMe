@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+
 Following user added<br>
 ${user.firstName}<br>
 ${user.emailId}<br>

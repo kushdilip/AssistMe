@@ -32,7 +32,5 @@
 	 <bean id="loginValidator" class="com.tavant.validator.LoginValidator" />
 	 
 	 <bean id="registrationValidator" class="com.tavant.validator.RegistrationValidator" />
-	 
-	 	
 		
 </beans>

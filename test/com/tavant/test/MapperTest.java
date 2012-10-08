@@ -29,7 +29,7 @@ public class MapperTest {
 	// @Test
 	public void testAdd() {
 		User user = new User();
-		user.setemailId("abc@gmail.com");
+		user.setEmailId("abc@gmail.com");
 		user.setFirstName("firstname");
 		user.setLastName("lastName");
 		user.setPassword("password");
