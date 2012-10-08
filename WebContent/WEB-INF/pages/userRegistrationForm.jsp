@@ -8,33 +8,46 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<div id="container" style="width: 100%">
+		<div id="header" style="background-color: #FFA500;" align="center">
+			<h1 style="margin-bottom: 0;">AssistMe</h1>
+			<h3>Your own Personal Assistant</h3>
+		</div>
+		<div id="registrationForm" align="center">
+			<h2>Registration Form</h2>
+			<form:form method="POST" commandName="user">
+				<table>
+					<tr>
+						<td>First Name:</td>
+						<td><form:input path="firstName" /></td>
+					</tr>
+					<tr>
+						<td>Last Name:</td>
+						<td><form:input path="lastName" /></td>
+					</tr>
+					<tr>
+						<td>Email Id:</td>
+						<td><form:input path="emailId" /></td>
+					</tr>
+					<tr>
+						<td>Password:</td>
+						<td><form:input path="password" type="password" /></td>
+					</tr>
+					<tr>
+						<td align="center" colspan="2"><input type="submit"
+							value="Add" /></td>
+					</tr>
+					<tr>
+						<td align="center" colspan="2"><input type="button"
+							value="Cancel" onClick="window.location.href='index.html'"></td>
+					</tr>
 
+				</table>
 
-	<h2>Registration Form</h2>
-	<form:form method="POST" commandName="user">
-		<table>
-			<tr>
-				<td>First Name:</td>
-				<td><form:input path="firstName" /></td>
-			<tr>
-				<td>Last Name:</td>
-				<td><form:input path="lastName" /></td>
-			</tr>
-			<tr>
-				<td>Email Id:</td>
-				<td><form:input path="emailId" /></td>
-			<tr>
-				<td>Password:</td>
-				<td><form:input path="password" type="password"/></td>
-			<tr>
-				<td align="center" colspan="2"><input type="submit" value="Add" /></td>
-			</tr>
-			<tr>
-				<td align="center" colspan="2"><input type="button"
-					value="Cancel" onClick="window.location.href='index.html'"></td>
-			</tr>
+			</form:form>
 
-		</table>
-
-	</form:form>
+		</div>
+	</div>
+	<jsp:include page="../common/footer.jsp"></jsp:include>
+</body>
 </html>

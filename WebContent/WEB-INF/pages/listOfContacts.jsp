@@ -8,6 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>My Contacts</title>
+
 </head>
 
 
@@ -15,29 +16,14 @@
 
 	<div id="container" style="width: 100%">
 
-		<div id="header" style="background-color: #FFA500;" align="center">
-			<h1 style="margin-bottom: 0;">AssistMe</h1>
-			<h3>Your own Personal Assistant</h3>
-			<p align="right"><a href="logout.html"><b>Logout</b></a></p>
-			
-		</div>
-
-		<div id="menu"
-			style="background-color: #FFD700; height: 490px; width: 150 px; float: left; font-size: large; font-weight: bold;">
-			<a href="home.html"><b>Home</b></a><br>
-			<a href="showContacts.html">Contacts</a><br> 
-			<a href ="showImportantDates.html">Important Dates</a><br>
-			Money Tracker
-		</div>
+		<jsp:include page="../common/header.jsp"></jsp:include>
+		<jsp:include page="../common/menubar.jsp"></jsp:include>
 
 
 		<div align="center">
-			<p>
-			Welcome User: ${currentUser.firstName}
-			</p>
 			<h3 align="center">Contacts List</h3>
 			<a href="showContacts.html">Refresh Contact List</a> <br> <br>
-			<table border="1" bordercolor="black">
+			<table id="contact_table">
 				<thead>
 					<tr>
 						<th>Index</th>
@@ -61,16 +47,17 @@
 							<td><a
 								href="deleteContact.html?contactId=${cntct.id}&contactName=${cntct.name}">delete</a>
 							</td>
-							
+
 						</tr>
 					</c:forEach>
 					<tr>
-						<td colspan="6" align="center"><a href="addContact.html">Add New Contact</a></td>
-						
+						<td colspan="6" align="center"><a href="addContact.html">Add
+								New Contact</a></td>
+
 					</tr>
 				</tbody>
 			</table>
-			
+
 		</div>
 
 

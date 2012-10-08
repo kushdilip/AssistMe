@@ -9,7 +9,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>You are at edit contact page</h1>
+	<jsp:include page="../common/header.jsp"></jsp:include>
+	<jsp:include page="../common/menubar.jsp"></jsp:include>
+
+	<h1>Edit Contact</h1>
 
 	<form:form method="POST" commandName="contact">
 		<form:input type="hidden" path="id" value="${contact.id}" />

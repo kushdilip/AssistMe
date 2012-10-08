@@ -8,9 +8,8 @@ import com.tavant.domain.Contact;
 
 public class ContactValidator implements Validator {
 
-	@SuppressWarnings("rawtypes")
 	@Override
-	public boolean supports(Class clazz) {
+	public boolean supports(Class<?> clazz) {
 		return Contact.class.isAssignableFrom(clazz);
 	}
 

@@ -28,7 +28,7 @@ public class ImportantDatesController {
 		this.anniversaryService = anniversaryService;
 	}
 	
-	@RequestMapping("/showImportantDates")
+	@RequestMapping("/importantDates")
 	public ModelAndView showImportantDates(HttpServletRequest request, ModelMap model){
 		
 		if (request.getSession().getAttribute("currentUser") == null) {
@@ -67,7 +67,7 @@ public class ImportantDatesController {
 				
 				model.addAttribute(anniversary);
 
-				return showImportantDates(request,model);
+				return new ModelAndView("redirect:importantDates.html",model);
 				
 			}
 	

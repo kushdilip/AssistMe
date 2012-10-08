@@ -53,14 +53,16 @@ public class ContactController {
 
 		ModelMap model = new ModelMap();
 
-		// contactValidator.validate(contact, result);
-		User user = (User) request.getSession().getAttribute("currentUser");
-		System.out.println(user);
-		contact.setUserId(user.getUserId());
-		contactService.addContact(contact);
-		model.addAttribute(contact);
-
-		return showContactList(request);
+		contactValidator.validate(contact, result);
+		if (result.hasErrors()) {
+			return new ModelAndView("contactAddForm");
+		} else {
+			User user = (User) request.getSession().getAttribute("currentUser");
+			contact.setUserId(user.getUserId());
+			contactService.addContact(contact);
+			model.addAttribute(contact);
+			return new ModelAndView("redirect:showContacts.html",model);
+		}
 	}
 
 	@RequestMapping("/showContacts")

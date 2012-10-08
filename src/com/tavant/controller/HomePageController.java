@@ -4,25 +4,20 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class HomePageController {
 
-	@RequestMapping({"/","/index"})
-	public String goMaster(HttpServletRequest request){
-//		System.out.println("In home controller");		
+	@RequestMapping({"/", "/index" })
+	public String goMaster(HttpServletRequest request) {
+		return "redirect:login.html";
+	}
 
-		return "master";
-	}
-	
 	@RequestMapping("/home")
-	public String goHome() {
-		return "home";
+	public ModelAndView goHome(HttpServletRequest request) {
+		return new ModelAndView("home");
 	}
-	
-	@RequestMapping("/logout")
-	public String logout(HttpServletRequest request){
-		request.getSession().removeAttribute("currentUser");
-		return goMaster(request);
-	}
+
+
 }

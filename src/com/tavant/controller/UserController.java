@@ -15,27 +15,28 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.tavant.domain.User;
 import com.tavant.services.UserService;
-
+import com.tavant.validator.LoginValidator;
 
 @Controller
 @SessionAttributes("currentUser")
 public class UserController {
 	private UserService userService;
-	
+	private LoginValidator loginValidator;
+
 	@Autowired
-	public UserController(UserService userService) {
+	public UserController(UserService userService, LoginValidator loginValidator) {
 		this.userService = userService;
-		
+		this.loginValidator = loginValidator;
 	}
-	
-	@RequestMapping(value="/userRegistration", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/userRegistration", method = RequestMethod.GET)
 	public String addContactForm(ModelMap model) {
 		User user = new User();
 		model.addAttribute(user);
 		return "userRegistrationForm";
 	}
 
-	@RequestMapping(value="/userRegistration", method = RequestMethod.POST)
+	@RequestMapping(value = "/userRegistration", method = RequestMethod.POST)
 	public ModelAndView onSubmit(@ModelAttribute("user") User user,
 			BindingResult result, SessionStatus status) {
 		ModelMap model = new ModelMap();
@@ -45,34 +46,49 @@ public class UserController {
 
 		return new ModelAndView("userAddSuccess", model);
 	}
-	
-	@RequestMapping("/login")
-	public ModelAndView onLogin(HttpServletRequest request, ModelMap model){
-		String emailId = request.getParameter("emailId");
-		String password = request.getParameter("password");
-		ModelAndView modelView = new ModelAndView();
-		
-		User currentUser = userService.selectByEmailId(emailId);
-//		System.out.println(currentUser);
-		
-		if (currentUser.getPassword().equals(password) && currentUser != null) {
-			
-			request.getSession().setAttribute("currentUser", currentUser);
-			
-			model.addAttribute(currentUser);
-			modelView.addAllObjects(model);
-			modelView.setViewName("home");
-		}
-		else {
-			modelView.setViewName("master");
-		}
-		
-		return modelView;
-		
-		
+
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public ModelAndView loginPageLoad(HttpServletRequest request) {
+		User user = new User();
+		ModelMap model = new ModelMap();
+		model.addAttribute(user);
+
+		return new ModelAndView("master", model);
 	}
-	
-	
-	
-	
+
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public ModelAndView onLogin(@ModelAttribute("user") User user,
+			BindingResult result, HttpServletRequest request) {
+		
+		
+		loginValidator.validate(user, result);
+		
+		if (result.hasErrors()) {
+			return new ModelAndView("master");
+		}
+		
+//		System.out.println("i'm from login controller " + user);
+//		User currentUser = userService.selectByEmailId(user.getemailId());
+		User currentUser = loginValidator.getValidUser();
+//		System.out.println("from login controller, valid user: " + currentUser);
+		
+		request.getSession().setAttribute("currentUser", currentUser);
+		return new ModelAndView("redirect:home.html");
+
+//		if (currentUser != null
+//				&& currentUser.getPassword().equals(user.getPassword())) {
+//			request.getSession().setAttribute("currentUser", currentUser);
+//			return new ModelAndView("redirect:home.html");
+//
+//		} else {
+//			return new ModelAndView("master");
+//		}
+	}
+
+	@RequestMapping("/logout")
+	public String logOut(HttpServletRequest request) {
+		request.getSession().removeAttribute("currentUser");
+		return "redirect:login.html";
+	}
+
 }

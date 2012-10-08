@@ -6,9 +6,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Contact Add Page</title>
+<link href="resources/styles/error.css" rel="stylesheet" type="text/css" />
+<link href="resources/styles/main.css" rel="stylesheet" type="text/css" />
+
 </head>
 <body>
+	<jsp:include page="../common/header.jsp"></jsp:include>
+	<jsp:include page="../common/menubar.jsp"></jsp:include>
+
 	<div align="center">
 		<h2>Add New Contact</h2>
 
@@ -17,7 +23,8 @@
 				<tr>
 					<td>Name :</td>
 					<td><form:input path="name" /></td>
-				</tr>	
+					<td><form:errors path="name" cssClass="error" /></td>
+				</tr>
 				<tr>
 					<td>Mobile :</td>
 					<td><form:input path="phoneNumber" /></td>
@@ -27,13 +34,13 @@
 					<td><form:input path="emailId" /></td>
 				</tr>
 				<tr>
-					<td align="center" colspan="2"><input type="submit"
+					<td align="center" colspan="2"><input class="button" type="submit"
 						value="Add" /></td>
 				</tr>
 				<tr>
-					<td align="center" colspan="2"><input type="button"
+					<td align="center" colspan="2"><input class="button" type="button"
 						value="Cancel" onClick="window.location.href='showContacts.html'"></td>
-				
+
 				</tr>
 			</table>
 		</form:form>

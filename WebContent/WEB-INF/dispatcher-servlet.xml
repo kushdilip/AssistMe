@@ -19,11 +19,18 @@
 		<property name="suffix" value=".jsp"></property>
 	</bean>
 	
+	
+	 <!--beans for validator  -->
 	 <bean id="messageSource"
 		class="org.springframework.context.support.ResourceBundleMessageSource">
-		<property name="basename" value="com/tavant/domain/Contact" />
-	</bean>
+		<property name="basename" value="com/tavant/domain/Message" />
+	 </bean>
 	
-	<bean id="contactValidator" class="com.tavant.validator.ContactValidator" />
+	 <bean id="contactValidator" class="com.tavant.validator.ContactValidator" />
+
 	
-	</beans>
+	 <bean id="loginValidator" class="com.tavant.validator.LoginValidator" />
+	 
+	 	
+		
+</beans>
