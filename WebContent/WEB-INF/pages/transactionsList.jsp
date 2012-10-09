@@ -4,16 +4,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Transactions</title>
 </head>
 <body>
-
-
-Following user added<br>
-${user.firstName}<br>
-${user.emailId}<br>
-
-
-<a href="login.html">Please login now</a>
+<jsp:include page="../common/header.jsp"></jsp:include>
+	<jsp:include page="../common/menubar.jsp"></jsp:include>
+	<div id="container" align="center">
+		
+	
+	</div>
+	
+	
+	<jsp:include page="../common/footer.jsp"></jsp:include>
 </body>
 </html>

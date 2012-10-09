@@ -23,7 +23,7 @@
 		<div align="center">
 			<h3 align="center">Contacts List</h3>
 			<a href="showContacts.html">Refresh Contact List</a> <br> <br>
-			<table id="contact_table">
+			<table id="contact_table" border="1">
 				<thead>
 					<tr>
 						<th>Index</th>
@@ -62,10 +62,7 @@
 
 
 
-		<div id="footer"
-			style="background-color: #FFA500; clear: both; text-align: center;">
-			Copyright © TavantTechnologies.com</div>
-	</div>
+		<jsp:include page="../common/footer.jsp"></jsp:include>
 
 
 </body>

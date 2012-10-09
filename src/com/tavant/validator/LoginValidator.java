@@ -1,6 +1,7 @@
 package com.tavant.validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -8,6 +9,7 @@ import org.springframework.validation.Validator;
 import com.tavant.domain.User;
 import com.tavant.services.UserService;
 
+@Service("loginValidator")
 public class LoginValidator implements Validator {
 	private UserService userService;
 	private User validUser;

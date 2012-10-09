@@ -38,7 +38,7 @@ public class ContactController {
 
 		// if user session is empty, return to master page
 		if (request.getSession().getAttribute("currentUser") == null) {
-			return new ModelAndView("master");
+			return new ModelAndView("redirect:login.html");
 		}
 
 		Contact contact = new Contact();
@@ -71,8 +71,7 @@ public class ContactController {
 
 		// if user session is empty, return to master page
 		if (request.getSession().getAttribute("currentUser") == null) {
-			// System.out.println("No one is logged in, returning to master page");
-			return new ModelAndView("master");
+			return new ModelAndView("redirect:login.html");
 		}
 
 		ModelMap model = new ModelMap();
@@ -91,8 +90,7 @@ public class ContactController {
 			ModelMap model) {
 		// if user session is empty, return to master page
 		if (request.getSession().getAttribute("currentUser") == null) {
-			System.out.println("No one is logged in, returning to master page");
-			return new ModelAndView("master");
+			return new ModelAndView("redirect:login.html");
 		}
 
 		Contact contact = contactService.selectById(Integer.parseInt(request
@@ -119,7 +117,7 @@ public class ContactController {
 			throws Exception {
 		// if user session is empty, return to master page
 		if (request.getSession().getAttribute("currentUser") == null) {
-			return new ModelAndView("master");
+			return new ModelAndView("redirect:login.html");
 		}
 
 		int id = Integer.parseInt(request.getParameter("contactId"));

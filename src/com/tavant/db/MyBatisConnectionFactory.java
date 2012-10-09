@@ -20,12 +20,12 @@ public class MyBatisConnectionFactory {
 						.build(reader);
 				sqlSessionFactory.getConfiguration().addMapper(
 						ContactMapper.class);
-				sqlSessionFactory.getConfiguration().addMapper(
-						UserMapper.class);
+				sqlSessionFactory.getConfiguration()
+						.addMapper(UserMapper.class);
 				sqlSessionFactory.getConfiguration().addMapper(
 						AnniversaryMapper.class);
-				
-
+				sqlSessionFactory.getConfiguration().addMapper(
+						TransactionMapper.class);
 			}
 
 		} catch (FileNotFoundException fileNotFoundException) {

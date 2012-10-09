@@ -7,6 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<link href="resources/styles/error.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <link
@@ -15,7 +16,7 @@
 
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
-	
+
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#datepicker").datepicker({
@@ -51,14 +52,19 @@
 							<form:option value="Birthday">Birthday</form:option>
 							<form:option value="Other">Other</form:option>
 						</form:select></td>
+
 				</tr>
 				<tr>
 					<td>People :</td>
 					<td><form:input path="people" /></td>
+					<td><form:errors path="people" cssClass="error" /></td>
+
 				</tr>
 				<tr>
 					<td>Date :</td>
 					<td><form:input id="datepicker" path="date" /></td>
+					<td><form:errors path="date" cssClass="error" /></td>
+					
 				</tr>
 				<tr>
 					<td></td>

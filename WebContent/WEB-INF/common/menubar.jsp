@@ -3,5 +3,5 @@
 			<a href="home.html"><b>Home</b></a><br>
 			<a href="showContacts.html">Contacts</a><br> 
 			<a href ="importantDates.html">Important Dates</a><br>
-			Money Tracker
+			<a href="transactions-list.html">Money Tracker</a>
 		</div>

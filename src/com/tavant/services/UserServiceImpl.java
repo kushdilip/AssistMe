@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tavant.db.impl.UserDAO;
-import com.tavant.domain.Contact;
 import com.tavant.domain.User;
 
 @Service("userService")

@@ -8,10 +8,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 
-<link href="resources/styles/reset.css" rel="stylesheet" type="text/css" />
+<!-- <link href="resources/styles/reset.css" rel="stylesheet" type="text/css" />
+ -->
 <link href="resources/styles/error.css" rel="stylesheet" type="text/css" />
 <link href="resources/styles/main.css" rel="stylesheet" type="text/css" />
-
 </head>
 
 <body>
@@ -23,8 +23,10 @@
 
 		<div id="loginbar" align="left"
 			style="background-color: #FFD700; height: 490px; width: 350px; float: right; font-size: large; font-weight: bold;">
-			<p>New User <a href="userRegistration.html"><b>Register</b></a></p>
-			
+			<p>
+				New User <a href="userRegistration.html"><b>Register</b></a>
+			</p>
+
 			<p>Already Registered, Please Login</p>
 
 			<form:form commandName="user" method="POST">
@@ -37,9 +39,9 @@
 						<td>Password:</td>
 						<td><form:input path="password" type="password" /></td>
 					</tr>
-					
+
 					<tr>
-						<td colspan="2" align="center"><input class="button" type="submit"
+						<td colspan="2" align="center"><input type="submit"
 							value="Login"></td>
 					</tr>
 					<tr>
@@ -48,7 +50,7 @@
 					<tr>
 						<td colspan="2"><form:errors path="password" cssClass="error" /></td>
 					</tr>
-					
+
 				</table>
 			</form:form>
 
@@ -57,7 +59,7 @@
 
 		<div id="footer"
 			style="background-color: #FFA500; clear: both; text-align: center;">
-			Copyright © TavantTechnologies.com</div>
+			Copyright © </div>
 	</div>
 
 </body>

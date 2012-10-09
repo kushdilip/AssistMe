@@ -1,11 +1,13 @@
 package com.tavant.validator;
 
+import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import com.tavant.domain.Contact;
 
+@Service("contactValidator")
 public class ContactValidator implements Validator {
 
 	@Override

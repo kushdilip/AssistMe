@@ -30,11 +30,11 @@ CREATE TABLE `anniversaries` (
   PRIMARY KEY (`anniversary_id`),
   KEY `FK_anniversaries1` (`user_id`),
   CONSTRAINT `FK_anniversaries1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 /*Data for the table `anniversaries` */
 
-insert  into `anniversaries`(`anniversary_id`,`title`,`date`,`people`,`repeat_cycle`,`user_id`) values (1,'birthday','1990-04-08','dilip','y',1),(3,'birthday','2011-04-05','dilip','y',3),(5,'birthday ','2011-05-23','sldfj','m',1);
+insert  into `anniversaries`(`anniversary_id`,`title`,`date`,`people`,`repeat_cycle`,`user_id`) values (1,'birthday','1990-04-08','dilip','y',1),(5,'birthday ','2011-05-23','sldfj','m',1),(6,'Birthday','2012-10-17','xyz','y',3),(7,'Birthday','2012-09-30','ddgdfgdfg','y',3),(8,'Birthday','2012-10-17','fsdfsdf','y',4),(9,'Birthday','2012-10-10','ddgdfgdfg','y',3),(10,'Birthday','2012-10-09','sfsdf','y',3),(11,'Other','2012-10-29','asdfsf','m',3);
 
 /*Table structure for table `contacts` */
 
@@ -49,11 +49,34 @@ CREATE TABLE `contacts` (
   PRIMARY KEY (`CONTACTS_PK`),
   KEY `FK_contacts4` (`user_id`),
   CONSTRAINT `FK_contacts4` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
 
 /*Data for the table `contacts` */
 
-insert  into `contacts`(`CONTACTS_PK`,`NAME`,`MOBILE`,`EMAIL_ID`,`user_id`) values (30,'Naresh kumar','545454','sdfsdfs',2),(31,'Anudeep','545454','ksjdfk',2),(32,'Naresh kumar','45345','kush.dilip@gmail.com',3),(35,'Siddhartha','9985587855','s.y@gmail.com',1),(36,'Siddhartha','9985587855','s.y@gmail.com',3);
+insert  into `contacts`(`CONTACTS_PK`,`NAME`,`MOBILE`,`EMAIL_ID`,`user_id`) values (32,'Naresh kumar','45345','kush.dilip@gmail.com',3),(35,'Siddhartha','9985587855','s.y@gmail.com',1),(36,'Siddhartha','9985587855','s.y@gmail.com',3),(37,'Anudeep','9985587855','k.s@gmail.com',4);
+
+/*Table structure for table `transactions` */
+
+DROP TABLE IF EXISTS `transactions`;
+
+CREATE TABLE `transactions` (
+  `transaction_id` int(11) NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `contact_id` int(11) NOT NULL,
+  `amount` int(11) NOT NULL,
+  `is_deleted` bit(1) NOT NULL DEFAULT b'0',
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`transaction_id`),
+  KEY `FK_iou_tracker1` (`user_id`),
+  KEY `FK_iou_tracker2` (`contact_id`),
+  CONSTRAINT `FK_iou_tracker1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
+  CONSTRAINT `FK_iou_tracker2` FOREIGN KEY (`contact_id`) REFERENCES `contacts` (`CONTACTS_PK`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+
+/*Data for the table `transactions` */
+
+insert  into `transactions`(`transaction_id`,`date`,`description`,`contact_id`,`amount`,`is_deleted`,`user_id`) values (1,'2010-12-30','lunch',36,200,'\0',3),(2,'2009-11-20','breakfast',32,400,'\0',3),(3,'2012-08-10','shopping',36,1000,'\0',3),(5,'2011-12-30','shopping',36,230,'\0',3),(10,'2011-12-30','shopping',36,230,'\0',3),(11,'2010-12-12','shopping',36,1200,'\0',3);
 
 /*Table structure for table `users` */
 
@@ -70,7 +93,7 @@ CREATE TABLE `users` (
 
 /*Data for the table `users` */
 
-insert  into `users`(`user_id`,`first_name`,`last_name`,`email_id`,`password`) values (1,'krishnashree','saika','k.s@gmail.com','password'),(2,'firstname','lastName','abc@gmail.com','password'),(3,'dilip','kushwaha','kush.dilip@gmail.com','password'),(4,'dfgdf','dfgdfg','dfgdfg','dfgf');
+insert  into `users`(`user_id`,`first_name`,`last_name`,`email_id`,`password`) values (1,'krishnashree','saika','k.s@gmail.com','password'),(3,'dilip','kushwaha','kush.dilip@gmail.com','password'),(4,'dilip','kushwaha','d.k@g.com','password');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
