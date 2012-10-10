@@ -49,11 +49,11 @@ CREATE TABLE `contacts` (
   PRIMARY KEY (`CONTACTS_PK`),
   KEY `FK_contacts4` (`user_id`),
   CONSTRAINT `FK_contacts4` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=latin1;
 
 /*Data for the table `contacts` */
 
-insert  into `contacts`(`CONTACTS_PK`,`NAME`,`MOBILE`,`EMAIL_ID`,`user_id`) values (32,'Naresh kumar','45345','kush.dilip@gmail.com',3),(35,'Siddhartha','9985587855','s.y@gmail.com',1),(36,'Siddhartha','9985587855','s.y@gmail.com',3),(37,'Anudeep','9985587855','k.s@gmail.com',4);
+insert  into `contacts`(`CONTACTS_PK`,`NAME`,`MOBILE`,`EMAIL_ID`,`user_id`) values (32,'Naresh kumar','45345','kush.dilip@gmail.com',3),(35,'Siddhartha','9985587855','s.y@gmail.com',1),(36,'Siddhartha','9985587855','s.y@gmail.com',3),(37,'Anudeep','9985587855','k.s@gmail.com',4),(38,'Siddhartha','545454','sdfsdfs',3),(39,'sdfsf','545454','k.s@gmail.com',3),(40,'sdlfkjsdfk','545454','kush.dilip@gmail.com',3),(41,'Samprity','9985587855','s.k@gmail.com',3),(42,'Anudeep','45345','sdfsdfs',3),(43,'mohit','545454','k.s@gmail.com',3),(44,'ramesh','','',3),(45,'ram','','',3),(46,'ram','','',3),(47,'Anudeep','','',3);
 
 /*Table structure for table `transactions` */
 
@@ -67,16 +67,17 @@ CREATE TABLE `transactions` (
   `amount` int(11) NOT NULL,
   `is_deleted` bit(1) NOT NULL DEFAULT b'0',
   `user_id` int(11) NOT NULL,
+  `contact_name` varchar(255) NOT NULL,
   PRIMARY KEY (`transaction_id`),
   KEY `FK_iou_tracker1` (`user_id`),
   KEY `FK_iou_tracker2` (`contact_id`),
   CONSTRAINT `FK_iou_tracker1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
   CONSTRAINT `FK_iou_tracker2` FOREIGN KEY (`contact_id`) REFERENCES `contacts` (`CONTACTS_PK`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
 
 /*Data for the table `transactions` */
 
-insert  into `transactions`(`transaction_id`,`date`,`description`,`contact_id`,`amount`,`is_deleted`,`user_id`) values (1,'2010-12-30','lunch',36,200,'\0',3),(2,'2009-11-20','breakfast',32,400,'\0',3),(3,'2012-08-10','shopping',36,1000,'\0',3),(5,'2011-12-30','shopping',36,230,'\0',3),(10,'2011-12-30','shopping',36,230,'\0',3),(11,'2010-12-12','shopping',36,1200,'\0',3);
+insert  into `transactions`(`transaction_id`,`date`,`description`,`contact_id`,`amount`,`is_deleted`,`user_id`,`contact_name`) values (14,'2012-10-24','lunch',38,200,'\0',3,'Siddhartha'),(15,'2012-08-20','movie',38,500,'\0',3,'Siddhartha'),(16,'2013-01-06','soemthing',32,1000,'\0',3,'Naresh kumar'),(19,'2012-10-11','soemthing',32,-123,'\0',3,'Naresh kumar'),(20,'2012-10-10','soemthing',36,-4545,'\0',3,'Siddhartha');
 
 /*Table structure for table `users` */
 

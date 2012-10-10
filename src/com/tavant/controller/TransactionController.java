@@ -1,9 +1,13 @@
 package com.tavant.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.catalina.connector.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -26,24 +30,27 @@ public class TransactionController {
 	public void setTransactionService(TransactionService transactionService) {
 		this.transactionService = transactionService;
 	}
-	
+
 	@Autowired
 	public void setContactService(ContactService contactService) {
 		this.contactService = contactService;
 	}
 
-
-
-	@RequestMapping("transactions-list")
+	@RequestMapping(value = "transactions-list")
 	public ModelAndView showTransactions(HttpServletRequest request) {
 		// if user session is empty, return to master page
 		if (request.getSession().getAttribute("currentUser") == null) {
 			return new ModelAndView("redirect:login.html");
 		}
-		Transaction transaction = new Transaction();
-		ModelMap model = new ModelMap();
-		model.addAttribute(transaction);
-		
+
+		User currentUser = (User) request.getSession().getAttribute(
+				"currentUser");
+		List<Transaction> transactionList = transactionService
+				.selectAll(currentUser.getUserId());
+		ModelMap model = new ModelMap(transactionList);
+
+		// model.addAttribute(request.getParameter("owe"));
+
 		return new ModelAndView("transactionsList", model);
 	}
 
@@ -55,21 +62,41 @@ public class TransactionController {
 		}
 
 		ModelMap model = new ModelMap();
+
 		Transaction transaction = new Transaction();
 		model.addAttribute(transaction);
-		return new ModelAndView("addTransaction",model);
-	}
-	
-	@RequestMapping(value = "transaction-add", method = RequestMethod.POST)
-	public ModelAndView onAddTransactionSubmit(@ModelAttribute("transaction") Transaction transaction,
-			BindingResult result, SessionStatus status,HttpServletRequest request){
+
+		String owes = request.getParameter("owes");
+		model.addAttribute("owes", owes);
 		
+		return new ModelAndView("addTransaction", model);
+	}
+
+	@RequestMapping(value = "transaction-add", method = RequestMethod.POST)
+	public ModelAndView onAddTransactionSubmit(
+			@ModelAttribute("transaction") Transaction transaction,
+			BindingResult result, SessionStatus status,
+			HttpServletRequest request) {
+		System.out.println(transaction);
 		User user = (User) request.getSession().getAttribute("currentUser");
 		transaction.setUserId(user.getUserId());
-		transaction.setContactName(contactService.selectById(transaction.getContactId()).getName());
 		
 		transactionService.addTransaction(transaction);
+
+		return new ModelAndView("redirect:transactions-list.html");
+	}
+	
+	@RequestMapping("delete-transaction")
+	public ModelAndView deleteTransaction(HttpServletRequest request) {
+		
+		if (request.getSession().getAttribute("currentUser") == null) {
+			return new ModelAndView("redirect:login.html");
+		}
+		
+		int id = Integer.parseInt(request.getParameter("transId"));
+		transactionService.deleteTransaction(id);
 		
 		return new ModelAndView("redirect:transactions-list.html");
+		
 	}
 }

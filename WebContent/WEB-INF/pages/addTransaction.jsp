@@ -44,22 +44,35 @@
 
 	<div id="container" align="center">
 
+		<c:set var="iOwes" value="I" />
+		<c:set var="someoneOwes" value="someone" />
+
 		<div id="transaction_form">
 			<form:form commandName="transaction" method="POST">
 				<table>
 					<tr>
-						<td>I owe :</td>
-						<td><form:select path="contactId" id="myOptions" selected="select">
+						<td><c:if test="${owes == iOwes }">
+							I Owe :
+						</c:if></td>
+						<td><form:select path="contactId" id="myOptions"
+								selected="select" style="width:150px">
+								<option selected="selected">Select contact</option>
 								<c:forEach items="${contactsList}" var="cntct" varStatus="loop">
 									<form:option value="${cntct.id}">${cntct.name}</form:option>
 								</c:forEach>
-								<option selected="selected" >Select Contact </option>
+						
 							</form:select></td>
-						<td><form:input path="contactName" type="hidden" id="contactName" /></td>
+						<td align="left"><c:if test="${owes == someoneOwes }">
+							Owes Me.
+						</c:if></td>
+						<td><form:input path="contactName" 
+								id="contactName" /></td>
 					</tr>
 					<tr>
-						<td>Rupees :</td>
-						<td><form:input path="amount" value="" /></td>
+						<td>&#8377; :</td>
+						<td><input type="text" id="amount"
+							onchange="setActualAmount(this.value)" /></td>
+						<td><form:input path="amount" id="actualAmount" type="hidden" /></td>
 						<td><form:errors path="amount" cssClass="error" /></td>
 					</tr>
 					<tr>
@@ -68,7 +81,7 @@
 						<td><form:errors path="description" cssClass="error" /></td>
 					</tr>
 					<tr>
-						<td>On date :</td>
+						<td>On :</td>
 						<td><form:input id="datepicker" path="date" /></td>
 						<td><form:errors path="date" cssClass="error" /></td>
 
@@ -76,13 +89,8 @@
 					<tr>
 						<td><input type="submit" value="Add" /></td>
 					</tr>
-
-
-
-
 				</table>
 			</form:form>
-
 
 
 
@@ -95,8 +103,26 @@
 	<script type="text/javascript">
 		$('#myOptions').change(function() {
 			var nameVal = $("#myOptions option:selected").text();
-			$('#contactName').val(nameVal); 
+			$('#contactName').val(nameVal);
 		});
+
+		function setActualAmount(val) {
+			var owes_param = gup('owes');
+			if (owes_param == 'someone')
+				val = -val;
+			document.getElementById("actualAmount").value = val;
+		}
+
+		function gup(name) {
+			name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+			var regexS = "[\\?&]" + name + "=([^&#]*)";
+			var regex = new RegExp(regexS);
+			var results = regex.exec(window.location.href);
+			if (results == null)
+				return "";
+			else
+				return results[1];
+		}
 	</script>
 
 </body>

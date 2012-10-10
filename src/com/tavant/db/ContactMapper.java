@@ -15,7 +15,7 @@ import com.tavant.domain.Contact;
 public interface ContactMapper {
 	final String DELETE = "DELETE FROM CONTACTS WHERE CONTACTS_PK = #{id}";
 	final String INSERT = "INSERT INTO CONTACTS (NAME, MOBILE, EMAIL_ID,USER_ID) VALUES (#{name}, #{phoneNumber}, #{emailId},#{userId})";
-	final String SELECT_ALL = "SELECT * FROM CONTACTS WHERE USER_ID = #{userId}";
+	final String SELECT_ALL = "SELECT * FROM CONTACTS WHERE USER_ID = #{userId} ORDER BY NAME";
 	final String SELECT_BY_ID = "SELECT * FROM CONTACTS WHERE CONTACTS_PK = #{id}";
 	final String UPDATE = "UPDATE CONTACTS SET EMAIL_ID = #{emailId}, NAME = #{name}, MOBILE = #{phoneNumber} WHERE CONTACTS_PK = #{id}";
 	

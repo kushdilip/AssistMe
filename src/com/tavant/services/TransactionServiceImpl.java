@@ -1,5 +1,7 @@
 package com.tavant.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,16 @@ public class TransactionServiceImpl implements TransactionService {
 	@Override
 	public void addTransaction(Transaction transaction) {
 		transactionDAO.insert(transaction);
+	}
+
+	@Override
+	public List<Transaction> selectAll(int userId) {
+		return transactionDAO.selectAll(userId);
+	}
+
+	@Override
+	public void deleteTransaction(int id) {
+		transactionDAO.delete(id);
 	}
 
 }

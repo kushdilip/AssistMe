@@ -15,7 +15,53 @@
 	<jsp:include page="../common/menubar.jsp"></jsp:include>
 
 	<div id="container" align="center"></div>
-	<a href="transaction-add.html">Add new transaction</a>
+
+	<div id="addMenu" align="center">
+		<br>
+		<table>
+			<tr>
+				<td>Add New:</td>
+				<td><button
+						onclick="window.location.href='transaction-add.html?owes=I'">I
+						owe someone</button></td>
+				<td><button
+						onclick="window.location.href='transaction-add.html?owes=someone'">Someone
+						owes me</button></td>
+			</tr>
+		</table>
+
+
+
+	</div>
+	<div align="center">
+		<h3 align="center">Bills and Transactions</h3>
+
+		<table border="1">
+			<tbody>
+				<c:forEach items="${transactionList}" var="trnsction"
+					varStatus="loop">
+					<c:set var="owingStatement" value="I owe ${trnsction.contactName}" />
+					<c:set var="owingCash" value=" ${trnsction.amount}" />
+
+					<c:if test="${trnsction.amount < 0 }">
+						<c:set var="owingStatement"
+							value="${trnsction.contactName} Owes Me" />
+						<c:set var="owingCash" value="${-trnsction.amount}" />
+					</c:if>
+
+					<tr>
+						<td><c:out value="${owingStatement}" /></td>
+						<td>&#8377;<c:out value="${owingCash}" /></td>
+						<td style="font-weight: bold">for <c:out
+								value="${trnsction.description}" /></td>
+						<td><a href="delete-transaction.html?transId=${trnsction.id}">delete</a>
+						</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+
+	</div>
 
 
 	<jsp:include page="../common/footer.jsp"></jsp:include>

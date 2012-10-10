@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -46,7 +47,6 @@ public class ContactController {
 		return new ModelAndView("contactAddForm");
 	}
 
-	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/addContact", method = RequestMethod.POST)
 	public ModelAndView onSubmit(@ModelAttribute("contact") Contact contact,
 			BindingResult result, SessionStatus status,
@@ -62,10 +62,12 @@ public class ContactController {
 		User user = (User) request.getSession().getAttribute("currentUser");
 		contact.setUserId(user.getUserId());
 		contactService.addContact(contact);
+		
 		model.addAttribute(contact);
-		((List<Contact>) request.getSession().getAttribute("contactsList"))
-				.add(contact);
-
+		
+		List<Contact> contactsList = contactService.selectAllContacts(user.getUserId());
+		request.getSession().setAttribute("contactsList", contactsList);
+		
 		return new ModelAndView("redirect:showContacts.html", model);
 
 	}
