@@ -21,9 +21,8 @@ public class TransactionDAOTest {
 
 	@Test
 	public void testInsert() {
-		Transaction transaction = new Transaction("2010-12-12", "shopping", 36, 1200, 3);
+		Transaction transaction = new Transaction("2010-12-12", "shopping", 36,"ramesh", 1200, 3);
 		System.out.println(transaction);
 		traDAO.insert(transaction);
 	}
-
 }

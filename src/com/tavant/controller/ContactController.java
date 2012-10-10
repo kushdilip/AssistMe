@@ -46,6 +46,7 @@ public class ContactController {
 		return new ModelAndView("contactAddForm");
 	}
 
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/addContact", method = RequestMethod.POST)
 	public ModelAndView onSubmit(@ModelAttribute("contact") Contact contact,
 			BindingResult result, SessionStatus status,
@@ -56,13 +57,17 @@ public class ContactController {
 		contactValidator.validate(contact, result);
 		if (result.hasErrors()) {
 			return new ModelAndView("contactAddForm");
-		} else {
-			User user = (User) request.getSession().getAttribute("currentUser");
-			contact.setUserId(user.getUserId());
-			contactService.addContact(contact);
-			model.addAttribute(contact);
-			return new ModelAndView("redirect:showContacts.html",model);
 		}
+
+		User user = (User) request.getSession().getAttribute("currentUser");
+		contact.setUserId(user.getUserId());
+		contactService.addContact(contact);
+		model.addAttribute(contact);
+		((List<Contact>) request.getSession().getAttribute("contactsList"))
+				.add(contact);
+
+		return new ModelAndView("redirect:showContacts.html", model);
+
 	}
 
 	@RequestMapping("/showContacts")
@@ -78,9 +83,9 @@ public class ContactController {
 
 		int currentUserId = ((User) request.getSession().getAttribute(
 				"currentUser")).getUserId();
-		List<Contact> contactsList = contactService
-				.selectAllContacts(currentUserId);
-		model.addAttribute(contactsList);
+		// List<Contact> contactsList =
+		// contactService.selectAllContacts(currentUserId);
+		// model.addAttribute(contactsList);
 
 		return new ModelAndView("listOfContacts", model);
 	}

@@ -9,18 +9,32 @@ public class Transaction implements Serializable {
 	private String date;
 	private String description;
 	private int contactId;
+	private String contactName;
 	private int amount;
 	private int userId;
+	
 
-	public Transaction(String date, String description, int contactId,
-			int amount, int userId) {
+	public Transaction( String date, String description, int contactId,
+			String contactName, int amount, int userId) {
 		super();
 		this.date = date;
 		this.description = description;
 		this.contactId = contactId;
+		this.contactName = contactName;
 		this.amount = amount;
 		this.userId = userId;
 	}
+	
+
+	public String getContactName() {
+		return contactName;
+	}
+
+
+	public void setContactName(String contactName) {
+		this.contactName = contactName;
+	}
+
 
 	public Transaction() {
 	}
@@ -76,8 +90,9 @@ public class Transaction implements Serializable {
 	@Override
 	public String toString() {
 		return "Transaction [id=" + id + ", date=" + date + ", description="
-				+ description + ", contactId=" + contactId + ", amount="
-				+ amount + ", userId=" + userId + "]";
+				+ description + ", contactId=" + contactId + ", contactName="
+				+ contactName + ", amount=" + amount + ", userId=" + userId
+				+ "]";
 	}
 
 	@Override
@@ -86,6 +101,8 @@ public class Transaction implements Serializable {
 		int result = 1;
 		result = prime * result + amount;
 		result = prime * result + contactId;
+		result = prime * result
+				+ ((contactName == null) ? 0 : contactName.hashCode());
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result
 				+ ((description == null) ? 0 : description.hashCode());
@@ -106,6 +123,11 @@ public class Transaction implements Serializable {
 		if (amount != other.amount)
 			return false;
 		if (contactId != other.contactId)
+			return false;
+		if (contactName == null) {
+			if (other.contactName != null)
+				return false;
+		} else if (!contactName.equals(other.contactName))
 			return false;
 		if (date == null) {
 			if (other.date != null)
