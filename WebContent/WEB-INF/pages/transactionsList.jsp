@@ -9,6 +9,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Transactions</title>
 
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
 </head>
 <body>
 	<jsp:include page="../common/header.jsp"></jsp:include>
@@ -36,24 +39,27 @@
 	<div align="center">
 		<h3 align="center">Bills and Transactions</h3>
 
-		<table border="1">
+		<table border="1" id="transactionTable">
 			<tbody>
+				
 				<c:forEach items="${transactionList}" var="trnsction"
 					varStatus="loop">
-					<c:set var="owingStatement" value="I owe ${trnsction.contactName}" />
-					<c:set var="owingCash" value=" ${trnsction.amount}" />
-
-					<c:if test="${trnsction.amount < 0 }">
-						<c:set var="owingStatement"
-							value="${trnsction.contactName} Owes Me" />
-						<c:set var="owingCash" value="${-trnsction.amount}" />
-					</c:if>
-
+					<c:set var="owingCash" value="${trnsction.amount}" />
 					<tr>
-						<td><c:out value="${owingStatement}" /></td>
+						<c:choose>
+							<c:when test="${trnsction.amount < 0 }">
+								<c:set var="owingCash" value="${-trnsction.amount}" />
+								<td><span> ${trnsction.contactName}</span> Owes me</td>
+							</c:when>
+							<c:otherwise>
+								<td>I owe <span> ${trnsction.contactName}</span></td>
+							</c:otherwise>
+						</c:choose>
+
 						<td>&#8377;<c:out value="${owingCash}" /></td>
-						<td style="font-weight: bold">for <c:out
-								value="${trnsction.description}" /></td>
+
+						<td>for <span> ${trnsction.description}</span></td>
+						<td>on ${trnsction.date}</td>
 						<td><a href="delete-transaction.html?transId=${trnsction.id}">delete</a>
 						</td>
 					</tr>
@@ -66,6 +72,12 @@
 
 	<jsp:include page="../common/footer.jsp"></jsp:include>
 
-
+	<script type="text/javascript">
+		$('#transactionTable td span').css({
+			'font-weight' : 'bold'
+		});
+		
+		$('#transactionTable td:odd').css({'background-color':'#dddddd'});
+	</script>
 </body>
 </html>

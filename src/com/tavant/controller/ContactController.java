@@ -82,12 +82,10 @@ public class ContactController {
 		}
 
 		ModelMap model = new ModelMap();
-
-		int currentUserId = ((User) request.getSession().getAttribute(
-				"currentUser")).getUserId();
-		// List<Contact> contactsList =
-		// contactService.selectAllContacts(currentUserId);
-		// model.addAttribute(contactsList);
+		
+		User user = ((User) request.getSession().getAttribute("currentUser"));
+		List<Contact> contactsList = contactService.selectAllContacts(user.getUserId());
+		request.getSession().setAttribute("contactsList", contactsList);
 
 		return new ModelAndView("listOfContacts", model);
 	}
@@ -112,7 +110,7 @@ public class ContactController {
 			BindingResult result, SessionStatus status,
 			HttpServletRequest request) throws Exception {
 
-		System.out.println("from post method " + contact);
+//		System.out.println("from post method " + contact);
 
 		contactService.updateContact(contact);
 
@@ -128,10 +126,10 @@ public class ContactController {
 		}
 
 		int id = Integer.parseInt(request.getParameter("contactId"));
-
+		
 		contactService.deleteContact(id);
-		System.out.println("Deleted Contact: "
-				+ request.getParameter("contactName"));
+		
+//		System.out.println("Deleted Contact: "+ request.getParameter("contactName"));
 		return showContactList(request);
 	}
 
