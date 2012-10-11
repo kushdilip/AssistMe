@@ -7,6 +7,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<link href="resources/styles/main.css" rel="stylesheet" type="text/css" />
+
 </head>
 <body>
 	<jsp:include page="../common/header.jsp"></jsp:include>
@@ -19,14 +21,11 @@
 	Name:<form:input path="name" value="${contact.name}" />
 	Mobile:<form:input path="phoneNumber" value="${contact.phoneNumber}" />
 	Email: <form:input path="emailId" value="${contact.emailId}" />
-		<input type="submit" value="submit" />
-		<input type="button" value="Cancel"
+		<input class="shiny-blue" type="submit" value="submit" />
+		<input class="shiny-blue" type="button" value="Cancel"
 			onClick="window.location.href='showContacts.html'">
 	</form:form>
 	<br>
-
-
-	<a href="showContacts.html">Go back to All Contacts Page</a>
 
 
 </body>

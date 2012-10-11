@@ -91,7 +91,6 @@ public class ContactController {
 			model.addAttribute("cantdelete",cantdelete);
 			model.addAttribute("contactName",name);
 		}
-		System.out.println(model);
 		
 		User user = ((User) request.getSession().getAttribute("currentUser"));
 		List<Contact> contactsList = contactService.selectAllContacts(user

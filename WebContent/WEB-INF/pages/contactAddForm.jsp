@@ -7,6 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Contact Add Page</title>
+<link href="resources/styles/error.css" rel="stylesheet" type="text/css" />
 <link href="resources/styles/main.css" rel="stylesheet" type="text/css" />
 
 </head>
@@ -33,14 +34,10 @@
 					<td><form:input path="emailId" /></td>
 				</tr>
 				<tr>
-					<td align="center" colspan="2"><input class="button"
-						type="submit" value="Add" /></td>
-				</tr>
-				<tr>
-					<td align="center" colspan="2"><input class="button"
+					<td align="center" colspan="2"><input class="shiny-blue"
+						type="submit" value="Add" />&nbsp;<input class="shiny-blue"
 						type="button" value="Cancel"
 						onClick="window.location.href='showContacts.html'"></td>
-
 				</tr>
 			</table>
 		</form:form>

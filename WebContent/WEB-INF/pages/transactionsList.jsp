@@ -9,6 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Transactions</title>
 
+<link href="resources/styles/main.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 
@@ -18,30 +19,27 @@
 	<jsp:include page="../common/menubar.jsp"></jsp:include>
 
 	<div id="container" align="center"></div>
-
 	<div id="addMenu" align="center">
 		<br>
 		<table>
 			<tr>
 				<td>Add New:</td>
-				<td><button
+				<td><button class="shiny-blue"
 						onclick="window.location.href='transaction-add.html?owes=I'">I
 						owe someone</button></td>
-				<td><button
+				<td><button class="shiny-blue"
 						onclick="window.location.href='transaction-add.html?owes=someone'">Someone
 						owes me</button></td>
 			</tr>
 		</table>
-
-
-
 	</div>
+
 	<div align="center">
 		<h3 align="center">Bills and Transactions</h3>
 
 		<table border="1" id="transactionTable">
 			<tbody>
-				
+
 				<c:forEach items="${transactionList}" var="trnsction"
 					varStatus="loop">
 					<c:set var="owingCash" value="${trnsction.amount}" />
@@ -59,7 +57,7 @@
 						<td>&#8377;<c:out value="${owingCash}" /></td>
 
 						<td>for <span> ${trnsction.description}</span></td>
-						<td>on ${trnsction.date}</td>
+						<td>on <span id="datedtls">${trnsction.date}</span></td>
 						<td><a href="delete-transaction.html?transId=${trnsction.id}">delete</a>
 						</td>
 					</tr>
@@ -76,8 +74,15 @@
 		$('#transactionTable td span').css({
 			'font-weight' : 'bold'
 		});
+
+		$('#transactionTable td:odd').css({
+			'background-color' : '#dddddd'
+		});
 		
-		$('#transactionTable td:odd').css({'background-color':'#dddddd'});
+
+		
+		
+		
 	</script>
 </body>
 </html>

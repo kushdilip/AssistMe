@@ -8,6 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Transactions</title>
+<link href="resources/styles/main.css" rel="stylesheet" type="text/css" />
 <link href="resources/styles/error.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
@@ -60,13 +61,13 @@
 								<c:forEach items="${contactsList}" var="cntct" varStatus="loop">
 									<form:option value="${cntct.id}">${cntct.name}</form:option>
 								</c:forEach>
-						
+
 							</form:select></td>
 						<td align="left"><c:if test="${owes == someoneOwes }">
 							Owes Me.
 						</c:if></td>
-						<td><form:input path="contactName" 
-								id="contactName" /></td>
+						<td><form:input path="contactName" id="contactName"
+								type="hidden" /></td>
 					</tr>
 					<tr>
 						<td>&#8377; :</td>
@@ -87,7 +88,11 @@
 
 					</tr>
 					<tr>
-						<td><input type="submit" value="Add" /></td>
+						<td></td>
+						<td><input class="shiny-blue" type="submit" value="Add" /> <input type="button"
+							class="shiny-blue" value="Cancel"
+							onClick="window.location.href='transactions-list.html'">
+						<td>
 					</tr>
 				</table>
 			</form:form>

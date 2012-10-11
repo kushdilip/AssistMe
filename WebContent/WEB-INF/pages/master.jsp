@@ -41,7 +41,7 @@
 					</tr>
 
 					<tr>
-						<td colspan="2" align="center"><input type="submit"
+						<td colspan="2" align="center"><input class="shiny-blue" type="submit"
 							value="Login"></td>
 					</tr>
 					<tr>
