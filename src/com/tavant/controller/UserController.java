@@ -1,6 +1,8 @@
 package com.tavant.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,29 +18,34 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tavant.domain.Contact;
+import com.tavant.domain.Transaction;
 import com.tavant.domain.User;
 import com.tavant.services.ContactService;
+import com.tavant.services.TransactionService;
 import com.tavant.services.UserService;
 import com.tavant.validator.LoginValidator;
 import com.tavant.validator.RegistrationValidator;
 
 @Controller
-@SessionAttributes({"currentUser","contactsList"})
+@SessionAttributes({"currentUser","contactsList","transHashMap"})
 public class UserController {
 	private UserService userService;
 	private ContactService contactService;
 	private LoginValidator loginValidator;
 	private RegistrationValidator regisValidator;
-	
+	private TransactionService transactionService;
 	
 	@Autowired
-	public UserController(UserService userService,ContactService contactService,
-			LoginValidator loginValidator, RegistrationValidator regisValidator) {
+	public UserController(UserService userService,
+			ContactService contactService, LoginValidator loginValidator,
+			RegistrationValidator regisValidator,
+			TransactionService transactionService) {
+		super();
 		this.userService = userService;
+		this.contactService = contactService;
 		this.loginValidator = loginValidator;
 		this.regisValidator = regisValidator;
-		this.contactService = contactService;
-
+		this.transactionService = transactionService;
 	}
 
 	@RequestMapping(value = "/userRegistration", method = RequestMethod.GET)
@@ -92,6 +99,14 @@ public class UserController {
 				.selectAllContacts(currentUser.getUserId());
 		request.getSession().setAttribute("contactsList", contactsList);
 		
+		//putting users transaction in a hashmap
+		List<Transaction> transactions = transactionService.selectAll(currentUser.getUserId());
+		HashMap<Integer, Transaction> transMap = new HashMap<Integer, Transaction>();
+		for (Transaction transaction : transactions) {
+			transMap.put(transaction.getContactId(),transaction);
+		}
+		request.getSession().setAttribute("transHashMap", transMap);
+//		System.out.println(request.getSession().getAttribute("transHashMap"));
 		
 		return new ModelAndView("redirect:home.html");		
 	}

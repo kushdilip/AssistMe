@@ -1,5 +1,6 @@
 package com.tavant.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tavant.domain.Contact;
+import com.tavant.domain.Transaction;
 import com.tavant.domain.User;
 import com.tavant.services.ContactService;
 import com.tavant.validator.ContactValidator;
@@ -62,18 +64,19 @@ public class ContactController {
 		User user = (User) request.getSession().getAttribute("currentUser");
 		contact.setUserId(user.getUserId());
 		contactService.addContact(contact);
-		
+
 		model.addAttribute(contact);
-		
-		List<Contact> contactsList = contactService.selectAllContacts(user.getUserId());
+
+		List<Contact> contactsList = contactService.selectAllContacts(user
+				.getUserId());
 		request.getSession().setAttribute("contactsList", contactsList);
-		
+
 		return new ModelAndView("redirect:showContacts.html", model);
 
 	}
 
-	@RequestMapping("/showContacts")
-	public ModelAndView showContactList(HttpServletRequest request)
+	@RequestMapping(value = "/showContacts")
+	public ModelAndView showContactList(HttpServletRequest request, ModelMap model)
 			throws Exception {
 
 		// if user session is empty, return to master page
@@ -81,12 +84,20 @@ public class ContactController {
 			return new ModelAndView("redirect:login.html");
 		}
 
-		ModelMap model = new ModelMap();
+		String cantdelete = request.getParameter("cantdelete");
+		String name = request.getParameter("name");
+		
+		if(cantdelete != null){
+			model.addAttribute("cantdelete",cantdelete);
+			model.addAttribute("contactName",name);
+		}
+		System.out.println(model);
 		
 		User user = ((User) request.getSession().getAttribute("currentUser"));
-		List<Contact> contactsList = contactService.selectAllContacts(user.getUserId());
+		List<Contact> contactsList = contactService.selectAllContacts(user
+				.getUserId());
 		request.getSession().setAttribute("contactsList", contactsList);
-
+		
 		return new ModelAndView("listOfContacts", model);
 	}
 
@@ -108,17 +119,17 @@ public class ContactController {
 	@RequestMapping(value = "/editContact", method = RequestMethod.POST)
 	public ModelAndView onEdit(@ModelAttribute("contact") Contact contact,
 			BindingResult result, SessionStatus status,
-			HttpServletRequest request) throws Exception {
+			HttpServletRequest request,ModelMap model) throws Exception {
 
-//		System.out.println("from post method " + contact);
+		// System.out.println("from post method " + contact);
 
 		contactService.updateContact(contact);
 
-		return showContactList(request);
+		return showContactList(request,model);
 	}
 
 	@RequestMapping("/deleteContact")
-	public ModelAndView deleteContact(HttpServletRequest request)
+	public ModelAndView deleteContact(HttpServletRequest request,ModelMap model)
 			throws Exception {
 		// if user session is empty, return to master page
 		if (request.getSession().getAttribute("currentUser") == null) {
@@ -126,11 +137,20 @@ public class ContactController {
 		}
 
 		int id = Integer.parseInt(request.getParameter("contactId"));
-		
-		contactService.deleteContact(id);
-		
-//		System.out.println("Deleted Contact: "+ request.getParameter("contactName"));
-		return showContactList(request);
+		String name = request.getParameter("contactName");
+		boolean cantDeleteContact = false;
+		cantDeleteContact = ((HashMap<Integer, Transaction>) request
+				.getSession().getAttribute("transHashMap")).containsKey(id);
+		if (!cantDeleteContact) {
+			contactService.deleteContact(id);
+		}
+		else {
+			
+		}
+				
+		// System.out.println("Deleted Contact: "+
+		// request.getParameter("contactName"));
+		return new ModelAndView("redirect:showContacts.html?name="+name+"&cantdelete="+cantDeleteContact, model);
 	}
 
 }

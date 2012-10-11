@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -20,6 +21,7 @@ import com.tavant.domain.Transaction;
 import com.tavant.domain.User;
 import com.tavant.services.ContactService;
 import com.tavant.services.TransactionService;
+
 
 @Controller
 public class TransactionController {
@@ -48,9 +50,9 @@ public class TransactionController {
 		List<Transaction> transactionList = transactionService
 				.selectAll(currentUser.getUserId());
 		ModelMap model = new ModelMap(transactionList);
-
+		
 		// model.addAttribute(request.getParameter("owe"));
-
+		
 		return new ModelAndView("transactionsList", model);
 	}
 
@@ -92,6 +94,7 @@ public class TransactionController {
 		if (request.getSession().getAttribute("currentUser") == null) {
 			return new ModelAndView("redirect:login.html");
 		}
+		
 		
 		int id = Integer.parseInt(request.getParameter("transId"));
 		transactionService.deleteTransaction(id);

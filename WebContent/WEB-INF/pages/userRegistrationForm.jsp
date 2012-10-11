@@ -45,7 +45,7 @@
 						<td><form:input path="confirmPassword" type="password" /></td>
 						<td><form:errors path="confirmPassword" cssClass="error" /></td>
 					</tr>
-					
+
 					<tr>
 						<td></td>
 						<td align="center" colspan="2"><input type="submit"

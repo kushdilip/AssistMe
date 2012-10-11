@@ -62,8 +62,15 @@
 
 
 	</div>
-	<jsp:include page="../common/footer.jsp"></jsp:include>
 
+	<jsp:include page="../common/footer.jsp"></jsp:include>
+	<script type="text/javascript">
+		var cantdelete = '<c:out value="${cantdelete}"/>';
+		var contactName = '<c:out value="${contactName}"/>';
+		if(cantdelete == "true"){
+			alert("First delete the entries in Money Tracker for "+ contactName);
+		}
+	</script>
 
 </body>
 </html>

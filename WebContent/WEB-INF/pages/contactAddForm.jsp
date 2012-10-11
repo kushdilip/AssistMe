@@ -7,7 +7,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Contact Add Page</title>
-<link href="resources/styles/error.css" rel="stylesheet" type="text/css" />
 <link href="resources/styles/main.css" rel="stylesheet" type="text/css" />
 
 </head>
@@ -34,19 +33,20 @@
 					<td><form:input path="emailId" /></td>
 				</tr>
 				<tr>
-					<td align="center" colspan="2"><input class="button" type="submit"
-						value="Add" /></td>
+					<td align="center" colspan="2"><input class="button"
+						type="submit" value="Add" /></td>
 				</tr>
 				<tr>
-					<td align="center" colspan="2"><input class="button" type="button"
-						value="Cancel" onClick="window.location.href='showContacts.html'"></td>
+					<td align="center" colspan="2"><input class="button"
+						type="button" value="Cancel"
+						onClick="window.location.href='showContacts.html'"></td>
 
 				</tr>
 			</table>
 		</form:form>
 
 
-	
+
 	</div>
 	<jsp:include page="../common/footer.jsp"></jsp:include>
 </body>
