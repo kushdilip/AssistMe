@@ -6,13 +6,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<link href="resources/styles/uniform.css" rel="stylesheet" type="text/css" />
+
 <link href="resources/styles/error.css" rel="stylesheet" type="text/css" />
 
 </head>
 <body>
 	<div id="container" style="width: 100%">
-		<div id="header" style="background-color: #FFA500;" align="center">
-			<h1 style="margin-bottom: 0;">AssistMe</h1>
+		<div id="header">
+			<h1>AssistMe</h1>
 			<h3>Your own Personal Assistant</h3>
 		</div>
 		<div id="registrationForm" align="center" style="height: 80%;">

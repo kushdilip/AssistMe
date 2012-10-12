@@ -19,10 +19,20 @@ public class TransactionDAOTest {
 		traDAO = null;
 	}
 
-	@Test
+//	@Test
 	public void testInsert() {
 		Transaction transaction = new Transaction("2010-12-12", "shopping", 36,"ramesh", 1200, 3);
 		System.out.println(transaction);
 		traDAO.insert(transaction);
 	}
+	
+	@Test
+	public void toGiveTest() {
+		System.out.println(traDAO.toGive(1));
+		System.out.println(traDAO.toCollect(1));
+		
+	}
+	
+	
+	
 }

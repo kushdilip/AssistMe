@@ -10,19 +10,22 @@
 
 <!-- <link href="resources/styles/reset.css" rel="stylesheet" type="text/css" />
  -->
+<link href="resources/styles/uniform.css" rel="stylesheet"
+	type="text/css" />
 <link href="resources/styles/error.css" rel="stylesheet" type="text/css" />
 <link href="resources/styles/main.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
 	<div id="container" style="width: 100%">
-		<div id="header" style="background-color: #FFA500;" align="center">
-			<h1 style="margin-bottom: 0;">AssistMe</h1>
+		<div id="header">
+			<h1>
+				AssistMe <span class="arrow"></span>
+			</h1>
 			<h3>Your own Personal Assistant</h3>
 		</div>
 
-		<div id="loginbar" align="left"
-			style="background-color: #FFD700; height: 490px; width: 350px; float: right; font-size: large; font-weight: bold;">
+		<div id="loginbar" align="left">
 			<p>
 				New User <a href="userRegistration.html"><b>Register</b></a>
 			</p>
@@ -41,8 +44,8 @@
 					</tr>
 
 					<tr>
-						<td colspan="2" align="center"><input class="shiny-blue" type="submit"
-							value="Login"></td>
+						<td colspan="2" align="center"><input class="shiny-blue"
+							type="submit" value="Login"></td>
 					</tr>
 					<tr>
 						<td colspan="2"><form:errors path="emailId" cssClass="error" /></td>
@@ -59,7 +62,7 @@
 
 		<div id="footer"
 			style="background-color: #FFA500; clear: both; text-align: center;">
-			Copyright © </div>
+			Copyright ©</div>
 	</div>
 
 </body>

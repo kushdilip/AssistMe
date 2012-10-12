@@ -6,7 +6,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Service;
 
-import com.tavant.db.ContactMapper;
 import com.tavant.db.MyBatisConnectionFactory;
 import com.tavant.db.TransactionMapper;
 import com.tavant.domain.Transaction;
@@ -48,7 +47,38 @@ public class TransactionDAO {
 			session.close();
 		}
 	}
+	
+	public int toGive(int userId) {
 
+		SqlSession session = sqlSessionFactory.openSession();
+
+		try {
+
+			TransactionMapper mapper = session
+					.getMapper(TransactionMapper.class);
+			int cashToGive = mapper.toGive(userId);
+
+			return cashToGive;
+		} finally {
+			session.close();
+		}
+	}
+
+	public int toCollect(int userId) {
+
+		SqlSession session = sqlSessionFactory.openSession();
+
+		try {
+
+			TransactionMapper mapper = session
+					.getMapper(TransactionMapper.class);
+			int cashToGive = mapper.toCollect(userId);
+
+			return cashToGive;
+		} finally {
+			session.close();
+		}
+	}
 	public void delete(int id) {
 
 		SqlSession session = sqlSessionFactory.openSession();

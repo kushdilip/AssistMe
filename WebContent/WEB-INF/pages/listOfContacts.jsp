@@ -8,13 +8,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>My Contacts</title>
+<link href="resources/styles/uniform.css" rel="stylesheet" type="text/css" />
 
 </head>
 
 
 <body>
 
-	<div id="container" style="width: 100%">
 
 		<jsp:include page="../common/header.jsp"></jsp:include>
 		<jsp:include page="../common/menubar.jsp"></jsp:include>
@@ -59,9 +59,6 @@
 			</table>
 
 		</div>
-
-
-	</div>
 
 	<jsp:include page="../common/footer.jsp"></jsp:include>
 	<script type="text/javascript">

@@ -32,4 +32,9 @@ public class TransactionServiceImpl implements TransactionService {
 		transactionDAO.delete(id);
 	}
 
+	@Override
+	public int[] getTotalAmounts(int userId) {
+		return new int[] {transactionDAO.toGive(userId), transactionDAO.toCollect(userId)};
+	}
+
 }

@@ -5,17 +5,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<link href="resources/styles/uniform.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-	<div id="container" style="width: 100%">
+	
 
 		<jsp:include page="../common/header.jsp"></jsp:include>
 		<jsp:include page="../common/menubar.jsp"></jsp:include>
 		
-		<div align="center">
-			<h1>Welcome</h1>
+		<div align="left">
+			<h1>Welcome ${currentUser.firstName}</h1>
 		</div>
 		<jsp:include page="../common/footer.jsp"></jsp:include>
-	</div>
 </body>
 </html>

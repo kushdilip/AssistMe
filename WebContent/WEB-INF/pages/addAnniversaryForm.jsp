@@ -7,6 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<link href="resources/styles/uniform.css" rel="stylesheet" type="text/css" />
 <link href="resources/styles/error.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
@@ -83,8 +84,8 @@
 				<tr></tr>
 				<tr>
 					<td></td>
-					<td><input type="submit" value="Add" /> <input type="button"
-						value="Cancel"
+					<td><input type="submit" class="shiny-blue" value="Add" /> <input type="button"
+						class="shiny-blue" value="Cancel"
 						onClick="window.location.href='importantDates.html'" /></td>
 				</tr>
 			</table>

@@ -1,13 +1,12 @@
 package com.tavant.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.catalina.connector.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,7 +20,6 @@ import com.tavant.domain.Transaction;
 import com.tavant.domain.User;
 import com.tavant.services.ContactService;
 import com.tavant.services.TransactionService;
-
 
 @Controller
 public class TransactionController {
@@ -52,7 +50,8 @@ public class TransactionController {
 		ModelMap model = new ModelMap(transactionList);
 		
 		// model.addAttribute(request.getParameter("owe"));
-		
+		int[] totalAmounts = transactionService.getTotalAmounts(currentUser.getUserId());
+		model.addAttribute("totalAmounts",totalAmounts);
 		return new ModelAndView("transactionsList", model);
 	}
 
@@ -64,7 +63,7 @@ public class TransactionController {
 		}
 
 		ModelMap model = new ModelMap();
-
+		
 		Transaction transaction = new Transaction();
 		model.addAttribute(transaction);
 
@@ -84,7 +83,8 @@ public class TransactionController {
 		transaction.setUserId(user.getUserId());
 		
 		transactionService.addTransaction(transaction);
-
+		((HashMap<Integer, Transaction>)request.getSession().getAttribute("transHashMap")).put(transaction.getContactId(), transaction);
+		
 		return new ModelAndView("redirect:transactions-list.html");
 	}
 	
@@ -97,7 +97,11 @@ public class TransactionController {
 		
 		
 		int id = Integer.parseInt(request.getParameter("transId"));
+		int contactId = Integer.parseInt(request.getParameter("contactId"));
+		
 		transactionService.deleteTransaction(id);
+		((HashMap<Integer, Transaction>)request.getSession().getAttribute("transHashMap")).remove(contactId);
+
 		
 		return new ModelAndView("redirect:transactions-list.html");
 		

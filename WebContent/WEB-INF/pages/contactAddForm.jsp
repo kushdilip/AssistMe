@@ -9,6 +9,8 @@
 <title>Contact Add Page</title>
 <link href="resources/styles/error.css" rel="stylesheet" type="text/css" />
 <link href="resources/styles/main.css" rel="stylesheet" type="text/css" />
+<link href="resources/styles/uniform.css" rel="stylesheet"
+	type="text/css" />
 
 </head>
 <body>
@@ -33,7 +35,9 @@
 					<td>Email :</td>
 					<td><form:input path="emailId" /></td>
 				</tr>
+				<tr></tr>
 				<tr>
+					<td></td>
 					<td align="center" colspan="2"><input class="shiny-blue"
 						type="submit" value="Add" />&nbsp;<input class="shiny-blue"
 						type="button" value="Cancel"

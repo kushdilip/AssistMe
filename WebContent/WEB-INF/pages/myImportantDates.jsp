@@ -7,6 +7,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<link href="resources/styles/uniform.css" rel="stylesheet"
+	type="text/css" />
+
 </head>
 <body>
 
@@ -15,8 +18,13 @@
 
 	<div align="center">
 		<h3 align="center">my important dates</h3>
-		<a href="importantDates.html">Refresh List</a> <br> <br>
-		<table border="1" bordercolor="black">
+
+		<input type="button" class="shiny-blue"
+			onClick="window.location.href='importantDates.html'" value="Refresh"
+			width="20"> <input type="button" class="shiny-blue"
+			onClick="window.location.href='addAnniversary.html'" value="Add"
+			width="20"> <br> <br>
+		<table border="1">
 			<thead>
 				<tr>
 
@@ -35,16 +43,11 @@
 						</td>
 					</tr>
 				</c:forEach>
-				<tr>
-					<td colspan="5" align="center"><a href="addAnniversary.html">Add
-							Anniversary</a></td>
-
-				</tr>
 			</tbody>
 		</table>
 
 	</div>
-			<jsp:include page="../common/footer.jsp"></jsp:include>
-	
+	<jsp:include page="../common/footer.jsp"></jsp:include>
+
 </body>
 </html>

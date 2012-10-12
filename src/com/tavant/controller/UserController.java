@@ -2,9 +2,9 @@ package com.tavant.controller;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,7 +27,7 @@ import com.tavant.validator.LoginValidator;
 import com.tavant.validator.RegistrationValidator;
 
 @Controller
-@SessionAttributes({"currentUser","contactsList","transHashMap"})
+//@SessionAttributes({"currentUser","contactsList","transHashMap"})
 public class UserController {
 	private UserService userService;
 	private ContactService contactService;
@@ -93,7 +93,11 @@ public class UserController {
 		//setting up session attribute currentUser
 		User currentUser = loginValidator.getValidUser();
 		request.getSession().setAttribute("currentUser", currentUser);
-
+		
+		request.getSession().setAttribute("ss", "hello  ");
+		
+		
+		
 		//setting up session attribute contactList
 		List<Contact> contactsList = contactService
 				.selectAllContacts(currentUser.getUserId());

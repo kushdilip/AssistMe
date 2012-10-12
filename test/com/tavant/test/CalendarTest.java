@@ -1,10 +1,7 @@
 package com.tavant.test;
 
-import static org.junit.Assert.*;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 import org.junit.AfterClass;
