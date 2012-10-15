@@ -7,13 +7,15 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import com.tavant.domain.User;
+import com.tavant.services.JavaMD5HashService;
 import com.tavant.services.UserService;
 
 @Service("loginValidator")
 public class LoginValidator implements Validator {
 	private UserService userService;
+	private JavaMD5HashService jHashService;
 	private User validUser;
-
+	
 	@Autowired
 	public void setUserService(UserService userService) {
 		this.userService = userService;
@@ -21,6 +23,11 @@ public class LoginValidator implements Validator {
 
 	public User getValidUser() {
 		return validUser;
+	}
+	
+	@Autowired
+	public void setjHashService(JavaMD5HashService jHashService) {
+		this.jHashService = jHashService;
 	}
 
 	@Override
@@ -34,9 +41,10 @@ public class LoginValidator implements Validator {
 				"required.emailid", "Field name is required.");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password",
 				"required.password", "Field name is required.");
-
+		
 		User user = (User) target;
-
+		user.setPassword(jHashService.md5(user.getPassword()));
+		
 		// System.out.println("i'm from validator " + user);
 		if (!((user.getEmailId()).trim().isEmpty() || (user.getPassword())
 				.trim().isEmpty())) {

@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +12,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -21,6 +19,7 @@ import com.tavant.domain.Contact;
 import com.tavant.domain.Transaction;
 import com.tavant.domain.User;
 import com.tavant.services.ContactService;
+import com.tavant.services.JavaMD5HashService;
 import com.tavant.services.TransactionService;
 import com.tavant.services.UserService;
 import com.tavant.validator.LoginValidator;
@@ -34,18 +33,21 @@ public class UserController {
 	private LoginValidator loginValidator;
 	private RegistrationValidator regisValidator;
 	private TransactionService transactionService;
+	private JavaMD5HashService jHashService;
 	
 	@Autowired
 	public UserController(UserService userService,
 			ContactService contactService, LoginValidator loginValidator,
 			RegistrationValidator regisValidator,
-			TransactionService transactionService) {
+			TransactionService transactionService,
+			JavaMD5HashService jHashService) {
 		super();
 		this.userService = userService;
 		this.contactService = contactService;
 		this.loginValidator = loginValidator;
 		this.regisValidator = regisValidator;
 		this.transactionService = transactionService;
+		this.jHashService = jHashService;
 	}
 
 	@RequestMapping(value = "/userRegistration", method = RequestMethod.GET)
@@ -64,6 +66,8 @@ public class UserController {
 		if(result.hasErrors()){
 			return new ModelAndView("userRegistrationForm");
 		}
+		
+		user.setPassword(jHashService.md5(user.getPassword()));
 		
 		userService.addUser(user);
 		model.addAttribute(user);
@@ -93,9 +97,7 @@ public class UserController {
 		//setting up session attribute currentUser
 		User currentUser = loginValidator.getValidUser();
 		request.getSession().setAttribute("currentUser", currentUser);
-		
-		request.getSession().setAttribute("ss", "hello  ");
-		
+				
 		
 		
 		//setting up session attribute contactList

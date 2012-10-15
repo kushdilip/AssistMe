@@ -5,6 +5,8 @@
     	 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" 
     	 id="WebApp_ID" version="3.0">
   <display-name>Spring Web MVC Application</display-name>
+  
+  
   <welcome-file-list>
       <welcome-file>
           index.jsp
@@ -40,4 +42,5 @@
 	    <servlet-name>default</servlet-name>
 	    <url-pattern>*.png</url-pattern>
 	</servlet-mapping>
+	
 </web-app>

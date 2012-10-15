@@ -143,8 +143,7 @@ public class ContactController {
 		if (!cantDeleteContact) {
 			contactService.deleteContact(id);
 		}
-		else {
-			
+		else {			
 		}
 				
 		// System.out.println("Deleted Contact: "+
