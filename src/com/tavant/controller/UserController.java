@@ -7,12 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -27,7 +27,7 @@ import com.tavant.validator.LoginValidator;
 import com.tavant.validator.RegistrationValidator;
 
 @Controller
-//@SessionAttributes({"currentUser","contactsList","transHashMap"})
+// @SessionAttributes({"currentUser","contactsList","transHashMap"})
 public class UserController {
 	private UserService userService;
 	private ContactService contactService;
@@ -35,7 +35,7 @@ public class UserController {
 	private RegistrationValidator regisValidator;
 	private TransactionService transactionService;
 	private JavaMD5HashService jHashService;
-	
+
 	@Autowired
 	public UserController(UserService userService,
 			ContactService contactService, LoginValidator loginValidator,
@@ -63,13 +63,13 @@ public class UserController {
 			BindingResult result, SessionStatus status) {
 		ModelMap model = new ModelMap();
 		regisValidator.validate(user, result);
-		
-		if(result.hasErrors()){
+
+		if (result.hasErrors()) {
 			return new ModelAndView("userRegistrationForm");
 		}
-		
+
 		user.setPassword(jHashService.md5(user.getPassword()));
-		
+
 		userService.addUser(user);
 		model.addAttribute(user);
 
@@ -95,42 +95,52 @@ public class UserController {
 			return new ModelAndView("master");
 		}
 
-		//setting up session attribute currentUser
+		// setting up session attribute currentUser
 		User currentUser = loginValidator.getValidUser();
 		request.getSession().setAttribute("currentUser", currentUser);
-				
-		
-		
-		//setting up session attribute contactList
+
+		// setting up session attribute contactList
 		List<Contact> contactsList = contactService
 				.selectAllContacts(currentUser.getUserId());
 		request.getSession().setAttribute("contactsList", contactsList);
-		
-		//putting users transaction in a hashmap
-		List<Transaction> transactions = transactionService.selectAll(currentUser.getUserId());
+
+		// putting users transaction in a hashmap
+		List<Transaction> transactions = transactionService
+				.selectAll(currentUser.getUserId());
 		HashMap<Integer, Transaction> transMap = new HashMap<Integer, Transaction>();
 		for (Transaction transaction : transactions) {
-			transMap.put(transaction.getContactId(),transaction);
+			transMap.put(transaction.getContactId(), transaction);
 		}
 		request.getSession().setAttribute("transHashMap", transMap);
-//		System.out.println(request.getSession().getAttribute("transHashMap"));
-		
-		return new ModelAndView("redirect:home.html");		
+		// System.out.println(request.getSession().getAttribute("transHashMap"));
+
+		return new ModelAndView("redirect:home.html");
 	}
-	
+
 	@RequestMapping("/forgot-password")
-	public ModelAndView forgotPassword(HttpServletRequest request) {
-		
-		String emailId = request.getParameter("emailId");
+	public ModelAndView forgotPassword(HttpServletRequest request, @RequestParam(value="emailId",required=false) String emailId, @RequestParam(value="kaptcha",required=false) String kaptcha) {
+
 		User user = new User(emailId, jHashService.md5("password"));
-		ModelMap model = new ModelMap("emailId", emailId);
 		boolean isReset = false;
-				
-		if(userService.updatePassword(user)){
+
+		// kaptcha
+		String kaptchaExpected = (String) request.getSession().getAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
+		String kaptchaReceived = kaptcha;
+		boolean isKaptcha = true;
+		
+		if (kaptchaReceived == null || !kaptchaReceived.equalsIgnoreCase(kaptchaExpected)) {
+			isKaptcha = false;
+		}
+		
+		if (isKaptcha && userService.updatePassword(user)) {
 			isReset = true;
 		}
 		
+		ModelMap model = new ModelMap("emailId", emailId);
+		model.addAttribute("isKaptcha", isKaptcha);
 		model.addAttribute("isReset", isReset);
+		model.addAttribute("kaptcha",kaptcha);
+		System.out.println(model);
 		
 		return new ModelAndView("resetPassword",model);
 	}
@@ -140,6 +150,5 @@ public class UserController {
 		request.getSession().removeAttribute("currentUser");
 		return "redirect:login.html";
 	}
-	
 
 }
