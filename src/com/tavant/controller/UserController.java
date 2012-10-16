@@ -140,5 +140,6 @@ public class UserController {
 		request.getSession().removeAttribute("currentUser");
 		return "redirect:login.html";
 	}
+	
 
 }

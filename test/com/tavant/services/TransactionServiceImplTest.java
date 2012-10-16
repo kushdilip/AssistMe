@@ -17,5 +17,4 @@ public class TransactionServiceImplTest {
 	public void testGetTotalAmounts() {
 		System.out.println(transactionService.getTotalAmounts(3)[0]);
 	}
-
 }
