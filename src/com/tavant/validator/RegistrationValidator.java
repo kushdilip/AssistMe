@@ -71,8 +71,6 @@ public class RegistrationValidator implements Validator {
 				errors.rejectValue("password", "notmatch.password");
 			}
 			
-			
-			
 		}
 
 	}

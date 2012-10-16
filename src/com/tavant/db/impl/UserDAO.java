@@ -45,4 +45,19 @@ public class UserDAO {
 		}
 
 	}
+
+	public void update(User user) {
+		SqlSession session = sqlSessionFactory.openSession();
+		try {
+
+			UserMapper mapper = session.getMapper(UserMapper.class);
+			mapper.update(user);
+			session.commit();
+
+		} finally {
+			session.close();
+		}
+
+	}
+
 }

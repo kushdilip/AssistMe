@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -115,6 +116,23 @@ public class UserController {
 //		System.out.println(request.getSession().getAttribute("transHashMap"));
 		
 		return new ModelAndView("redirect:home.html");		
+	}
+	
+	@RequestMapping("/forgot-password")
+	public ModelAndView forgotPassword(HttpServletRequest request) {
+		
+		String emailId = request.getParameter("emailId");
+		User user = new User(emailId, jHashService.md5("password"));
+		ModelMap model = new ModelMap("emailId", emailId);
+		boolean isReset = false;
+				
+		if(userService.updatePassword(user)){
+			isReset = true;
+		}
+		
+		model.addAttribute("isReset", isReset);
+		
+		return new ModelAndView("resetPassword",model);
 	}
 
 	@RequestMapping("/logout")

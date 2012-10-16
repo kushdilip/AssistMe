@@ -8,22 +8,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 
-<!-- <link href="resources/styles/reset.css" rel="stylesheet" type="text/css" />
- -->
+
 <link href="resources/styles/uniform.css" rel="stylesheet"
 	type="text/css" />
 <link href="resources/styles/error.css" rel="stylesheet" type="text/css" />
-<link href="resources/styles/main.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
-	<div id="container" style="width: 100%">
-		<div id="header">
-			<h1>
-				AssistMe <span class="arrow"></span>
-			</h1>
-			<h3>Your own Personal Assistant</h3>
-		</div>
+	<div id="container">
+		<jsp:include page="../common/masterHeader.jsp"></jsp:include>
 
 		<div id="loginbar" align="left">
 			<p>
@@ -56,6 +49,11 @@
 
 				</table>
 			</form:form>
+			
+			<p>
+				<a href="forgot-password.html"><b>Forgot Password</b></a>
+			</p>
+			
 
 		</div>
 

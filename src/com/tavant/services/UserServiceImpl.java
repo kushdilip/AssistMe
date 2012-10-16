@@ -26,4 +26,15 @@ public class UserServiceImpl implements UserService {
 		return userDAO.selectByEmailId(emailId);
 	}
 
+	@Override
+	public boolean updatePassword(User user) {
+		boolean result = false;
+		if (userDAO.selectByEmailId(user.getEmailId()) != null) {
+			userDAO.update(user);
+			result = true;
+		}
+
+		return result;
+	}
+
 }

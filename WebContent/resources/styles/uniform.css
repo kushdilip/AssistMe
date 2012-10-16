@@ -6,12 +6,11 @@ body {
 		repeat scroll 0 0 #000000;
 }
 
-#container {
-	margin: auto;
-	width: 500px;
-	height: 700px;
-	padding-top: 30px;
-	font-family: helvetica, arial, sans-serif;
+.container {
+	width: 960px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
 }
 
 #header {
@@ -28,8 +27,8 @@ body {
 	background: orange; /*Background color to header*/
 	background: -moz-linear-gradient(top, red, FFFFFF);
 	/*from to colors, I have used simple name it can be replaced by color codes*/
-	background: -webkit-gradient(linear, left top, left bottom, from(red),
-		to(white) );
+	background : -webkit-gradient( linear, left top, left bottom, from( red
+	), to( white));
 	padding: 10px 20px;
 	margin-left: -20px;
 	margin-top: 0;
@@ -41,6 +40,18 @@ body {
 	box-shadow: 1px 1px 3px #292929;
 	color: #454545;
 	text-shadow: 0 1px 0 white;
+	font-size: 24px;
+	margin-bottom: 10px;
+}
+
+#header h2 {
+	font-size: 18px;
+	margin-top: 30px;
+	margin-bottom: 10px;
+}
+
+p {
+	margin-bottom: 10px;
 }
 
 .arrow {
@@ -95,14 +106,15 @@ body {
 #base {
 	float: left;
 	width: 12em;
-	height: 100 %;
+	height: 100%;
 	border-right: 1px solid #000;
 	padding: 0 0 1em 0;
 	margin-bottom: 1em;
 	font-family: 'Trebuchet MS', 'Lucida Grande', Verdana, Lucida, Geneva,
 		Helvetica, Arial, sans-serif;
-/* 	background-color: #90bade;
- */ 	background-image: url("/AssistMe/resources/images/header.png");
+	/* 	background-color: #90bade;
+ */
+	background-image: url("/AssistMe/resources/images/header.png");
 	color: #333;
 }
 

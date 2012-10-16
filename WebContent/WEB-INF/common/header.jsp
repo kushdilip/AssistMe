@@ -6,8 +6,11 @@
 				</h1>
 				<h3>Your own Personal Assistant</h3></td>
 
-			<td align="right" style="width: 10%">${currentUser.firstName}
-				${currentUser.lastName}<br> <a href="logout.html"><b>Logout</b></a>
+			<td align="right" style="width: 10%">
+				<p>${currentUser.firstName} ${currentUser.lastName}
+				<br><a href="profile.html"><b>Profile</b></a>
+				<br><a href="logout.html"><b>Logout</b></a>
+				</p>
 			</td>
 		</tr>
 	</table>

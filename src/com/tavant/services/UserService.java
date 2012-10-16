@@ -7,4 +7,5 @@ public interface UserService {
 
 	public User selectByEmailId(String emailId);
 
+	public boolean updatePassword(User user);
 }

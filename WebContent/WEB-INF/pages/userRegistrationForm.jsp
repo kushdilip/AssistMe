@@ -6,17 +6,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
-<link href="resources/styles/uniform.css" rel="stylesheet" type="text/css" />
+<link href="resources/styles/uniform.css" rel="stylesheet"
+	type="text/css" />
 
 <link href="resources/styles/error.css" rel="stylesheet" type="text/css" />
 
 </head>
 <body>
 	<div id="container" style="width: 100%">
-		<div id="header">
-			<h1>AssistMe</h1>
-			<h3>Your own Personal Assistant</h3>
-		</div>
+		<jsp:include page="../common/masterHeader.jsp"></jsp:include>
+
 		<div id="registrationForm" align="center" style="height: 80%;">
 			<h2>Registration Form</h2>
 			<form:form method="POST" commandName="user">
@@ -51,12 +50,13 @@
 					<tr>
 						<td></td>
 						<td align="center" colspan="2"><input type="submit"
-							value="Add" /></td>
+							class="shiny-blue" value="Add" /></td>
 					</tr>
 					<tr>
 						<td></td>
 						<td align="center" colspan="2"><input type="button"
-							value="Cancel" onClick="window.location.href='index.html'"></td>
+							class="shiny-blue" value="Cancel"
+							onClick="window.location.href='index.html'"></td>
 					</tr>
 
 				</table>

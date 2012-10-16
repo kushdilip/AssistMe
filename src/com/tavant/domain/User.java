@@ -10,7 +10,16 @@ public class User implements Serializable {
 	private String password;
 	private String emailId;
 	private String confirmPassword;
-	
+
+	public User() {
+	}
+
+	public User(String emailId,String password) {
+		super();
+		this.password = password;
+		this.emailId = emailId;
+	}
+
 	public int getUserId() {
 		return userId;
 	}
@@ -42,7 +51,6 @@ public class User implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
 
 	public String getEmailId() {
 		return emailId;
